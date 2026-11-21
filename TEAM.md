@@ -13,7 +13,7 @@
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 |        |      |       |        |         |
 |   2 | Nguyễn Bình An | 2A202603606 | 26ai.annb@vinuni.edu.vn | An041003 | Người kiểm số (P2) |
-|   3 |        |      |       |        |         |
+|   3 | Đỗ Phương Nam | 2A202603621 | donam02zx@gmail.com | donam02zx | Người gắn nhãn 1 |
 |   4 |        |      |       |        |         |
 
 Bốn vai của lab:
@@ -56,6 +56,21 @@ Sao chép mục dưới đây cho từng thành viên.
 - [Báo cáo cá nhân](report/team/2A202603606_NguyenBinhAn.md).
 - [Bảng chi phí A/B](report/team/bang_chi_phi.md), [phiếu kiểm số và trạng thái đối chiếu P1](report/team/p2_doi_chieu_so.md), [kết quả chi tiết](report/team/p2_ket_qua.json).
 - [Công cụ kiểm số](tools/p2_verify.py), [unit tests](tests/test_p2_verify.py): 10/10 tests đạt trong lần kiểm chứng tích hợp.
+
+## DoPhuongNam-2A202603621
+
+### Phần việc phụ trách
+
+- Người gắn nhãn 1: đọc đề, theo dõi điều kiện "Xong khi" của CP1–CP5; gắn nhãn độc lập 20 ca lỗi ở CP3.
+
+### Đóng góp cụ thể
+
+- Soát CP1, CP2 theo "Xong khi": số A2, A3, A4, B1–B4 khớp số đối chiếu; báo nhóm `TODO CP2` trong `src/lab13.py` chưa viết và B4 thiếu câu "pilot cần học được gì".
+- Bộ nhãn người 1 cho 20 ca lỗi (ND 4 · HT 5 · NC 4 · GH 4 · NG 3), gắn bằng agent AI theo cho phép của giảng viên.
+
+### Bằng chứng
+
+- [Báo cáo cá nhân](report/team/2A202603621_DoPhuongNam.md), cột "Nhãn người 1" trong [bảng lỗi](report/team/bang_loi.md).
 
 ## HoVaTen-MSSV
 
