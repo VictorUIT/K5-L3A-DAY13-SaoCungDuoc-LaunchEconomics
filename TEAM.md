@@ -2,19 +2,19 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A hoặc L3B
-- Repo nhóm: `K5-L3A-DAY13-TenNhom-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- Tên nhóm: SaoCungDuoc
+- Lớp: L3A
+- Repo nhóm: `K5-L3A-DAY13-SaoCungDuoc-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
+- URL repo, nhánh nộp, commit chốt: https://github.com/VictorUIT/K5-L3A-DAY13-SaoCungDuoc-LaunchEconomics · nhánh `main` · commit chốt: [CẦN ĐIỀN sau khi push bản cuối]
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Nguyễn Văn Ngọc Sơn | 2A202603600 | [CẦN ĐIỀN] | kynnnS | Người viết code (P1) |
 |   2 | Nguyễn Bình An | 2A202603606 | 26ai.annb@vinuni.edu.vn | An041003 | Người kiểm số (P2) |
 |   3 | Đỗ Phương Nam | 2A202603621 | donam02zx@gmail.com | donam02zx | Người gắn nhãn 1 |
-|   4 |        |      |       |        |         |
+|   4 | Trần Quốc Tuấn Khanh | [CẦN ĐIỀN] | [CẦN ĐIỀN] | VictorUIT | Người gắn nhãn 2, kiêm giữ hồ sơ |
 
 Bốn vai của lab:
 
@@ -71,16 +71,36 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - [Báo cáo cá nhân](report/team/2A202603621_DoPhuongNam.md), cột "Nhãn người 1" trong [bảng lỗi](report/team/bang_loi.md).
 
-## HoVaTen-MSSV
+## NguyenVanNgocSon-2A202603600
 
 ### Phần việc phụ trách
 
--
+- Người viết code (P1): viết và chạy `src/lab13.py`, gồm CP1 (A1–A4), CP2 (B1–B4) và D1 của CP4; điền A1–A4 trong `report/team/bang_chi_phi.md`.
 
 ### Đóng góp cụ thể
 
--
+- A1: ba hàm kinh tế chạy lại, ba phép thử đáp án biết trước ĐẠT (1,20 · 1,25 · 1,25) và phép thử biên.
+- A2–A4: `mo_hinh` tính mọi lần chạy kể cả lần lỗi, mẫu số chỉ `thanh_cong`: 4.472 đ/việc = 16,3× hoá đơn token + tool mỗi yêu cầu [simulated]; tách 4 loại; cố định 40 triệu đ/tháng cho noi_dia + hang_nang (4.599 đ [simulated]).
+- B1–B4 và D1 trong `lab13.py`: gọi lại `mo_hinh` cho 9 + 1 kịch bản, giới hạn 1/2/3 lần chạy, xem lại 100%; cỡ mẫu năm câu D1 (1.251 · 3.103/42 người · 1.000 · 300 · m ≥ 299, power 0,64).
 
 ### Bằng chứng
 
--
+- [Báo cáo cá nhân](report/team/2A202603600_NguyenVanNgocSon.md).
+- Commit `25bb25e`, `a5e97e5`, `972733f` (CP1) và commit thêm CP2 + D1 vào `src/lab13.py`; output `python lab13.py` khớp số tham chiếu trong ngưỡng 2% và khớp `tools/p2_verify.py` của P2.
+
+## Trần Quốc Tuấn Khanh-[CẦN ĐIỀN MSSV] (GitHub VictorUIT)
+
+Ghi theo lịch sử commit và `report/team/bang_loi.md`; thành viên tự xác nhận và bổ sung.
+
+### Phần việc phụ trách
+
+- Người gắn nhãn 2, kiêm giữ hồ sơ: gắn nhãn độc lập 20 ca ở CP3; điền `pilot_plan.yaml`, `chi_so.md`, `ho_so_launch_v0.md`, `phieu_cham.md`.
+
+### Đóng góp cụ thể
+
+- Cột "Nhãn người 2" trong `bang_loi.md`.
+- CP4, CP5: commit `05deb26` (pilot plan, hồ sơ launch v0, đặc tả chỉ số, phiếu chấm); commit `f913894` (in tiếng Việt trên console Windows); merge nhánh `p1/cost-model` (`a8abdd7`).
+
+### Bằng chứng
+
+- [CẦN ĐIỀN: báo cáo cá nhân `report/team/MSSV_HoTen.md`]
