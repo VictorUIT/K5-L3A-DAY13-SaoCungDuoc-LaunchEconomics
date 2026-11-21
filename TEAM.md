@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | Nguyễn Văn Ngọc Sơn | 2A202603600 | [CẦN ĐIỀN] | kynnnS | Người viết code (P1) |
+|   1 | Nguyễn Văn Ngọc Sơn | 2A202603600 | kidoamdice@gmail.com | kynnnS | Người viết code (P1) |
 |   2 | Nguyễn Bình An | 2A202603606 | 26ai.annb@vinuni.edu.vn | An041003 | Người kiểm số (P2) |
 |   3 | Đỗ Phương Nam | 2A202603621 | donam02zx@gmail.com | donam02zx | Người gắn nhãn 1 |
 |   4 | Trần Quốc Tuấn Khanh | [CẦN ĐIỀN] | [CẦN ĐIỀN] | VictorUIT | Người gắn nhãn 2, kiêm giữ hồ sơ |
