@@ -12,6 +12,8 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 | Pilot ra được quyết định | Không đối chứng hoặc thiếu cỡ mẫu | Đủ cỡ mẫu, luật dừng chung chung | Tách được tác động, đủ mẫu, luật dừng có ngưỡng, thời hạn, người có quyền dừng | 10 | Chia ngẫu nhiên theo nhân viên 20 + 20, phân tầng theo depot, đối chứng chạy cùng thời gian. D1 đúng cả năm câu (1.251 · 3.103/42 người · 1.000 · 300 · m ≥ 299, DE 6,96). Ba luật dừng đủ bốn vế, có ngưỡng, thời hạn, người dừng; rollback 30 phút. Hai điểm yếu: (1) bước 0.50 chỉ 1 tuần ≈ 30,7 yc/nhân viên/ngày × 7 ≈ 215 < 299 nên có thể thiếu mẫu (xem câu hỏi); (2) luật chi phí 8.000 đ/việc sẽ bị kích ngay nếu xem lại 100% (11.743 đ theo B4 của chính nhóm) |
 | **Tổng** | | | | **30 / 30** | |
 
+**Xác nhận:** hai nhóm SaoCungDuoc và 04552 đã thảo luận trực tiếp và xác nhận điểm chấm chính xác, đúng quy trình.
+
 **Quyết định của hội đồng:** Go có điều kiện
 
 **Lý do:** Phạm vi noi_dia + hang_nang rẻ hơn nhân viên tự làm ngay cả khi cộng chi phí cố định ở một nửa khối lượng (5.784 đ = 0,48× [simulated]). Pilot tách được tác động và đã ghi rõ đánh đổi mức chênh 6 điểm, power 0,64. Hội đồng đồng ý bốn điều kiện của nhóm và đề nghị thêm ba điều kiện: (a) kéo dài bước 0.50 hoặc ghi rõ số ngày đo để mỗi nhân viên đạt m ≥ 299 yêu cầu; (b) luật an toàn tách riêng hang_nang (mở lại 8,23% trong đợt chạy thử) và so với đối chứng cùng loại; (c) sửa ngưỡng chi phí 8.000 đ cho khớp kế hoạch giảm xem lại theo bậc, vì xem lại 100% đã là 11.743 đ [simulated]. Ngoài ra, mục 5 (bảng lỗi) còn "Chưa": `bang_loi.md` có bảng khắc phục 5 ca nhưng chưa có hai bộ nhãn và tỉ lệ đồng thuận.
