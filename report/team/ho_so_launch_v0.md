@@ -16,7 +16,7 @@ Nhóm: SaoCungDuoc · Lớp: L3A
 
 **Đề xuất:** **Go có điều kiện**, chỉ cho pilot noi_dia + hang_nang (82% số yêu cầu: 982/1.200). Bắt đầu 2026-12-07 nếu đủ các điều kiện sau:
 
-- Giám đốc vận hành ký chấp nhận mức chênh tối thiểu 6 điểm và power 0,64 nếu tác động thật là 5 điểm, cùng thay đổi sau phản biện hội đồng: luật dừng chi phí 9.600 đ chỉ áp từ bước 0.50 (bước 0.10 và 0.25 vẫn xem lại 100%, đã biết trước 11.764 đ/yêu cầu = 0,98× [simulated]). **Kiểm tra: 2026-12-04.**
+- Giám đốc vận hành ký chấp nhận mức chênh tối thiểu 6 điểm và power 0,64 nếu tác động thật là 5 điểm, cùng thay đổi sau phản biện hội đồng: luật dừng chi phí 9.600 đ/yêu cầu chỉ áp từ bước 0.50 (bước 0.10 và 0.25 vẫn xem lại 100%, đã biết trước 11.178 đ/yêu cầu = 0,93× [simulated]); chi phí tính theo một định nghĩa chung với event (ca lam_lai chỉ tính phút làm lại, 12.000 đ chỉ cho ca chuyển nhân viên) và cố định quy đổi cùng mẫu số, 2.172 đ/yêu cầu. **Kiểm tra: 2026-12-04.**
 - Khoá chống hoàn trùng (ca 20 trong `bang_loi.md`) và đối soát sổ cái mỗi giờ chạy trước ngày bắt đầu. Người phụ trách: Kế toán trưởng. **Kiểm tra: 2026-12-04.**
 - Bật đủ event có `trace_id`. Đo phút xem lại, làm lại thật để thay số simulated sau tuần 1. Người phụ trách: PM trợ lý hoàn phí. **Kiểm tra: 2026-12-14.**
 - Giảm tỉ lệ xem lại theo bậc trước bước 0.50, vì xem lại 100% gần như không tiết kiệm (0,98–1,03×, simulated). Người phụ trách: Trưởng nhóm CSKH. **Kiểm tra: 2026-12-21.**

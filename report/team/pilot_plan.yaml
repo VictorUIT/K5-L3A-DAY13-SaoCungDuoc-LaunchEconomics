@@ -35,9 +35,22 @@
 #   cùng loại (≥ 2 điểm), không dùng trần 6% cho riêng loại này.
 #
 # Thay đổi thiết kế sau phản biện hội đồng Gate 2a (2026-11-21, trước ngày bắt đầu, chưa có dữ liệu pilot):
-#   Luật chi phí 9.600 đ chỉ áp từ bước 0.50. Lý do: bước 0.10 và 0.25 vẫn xem lại 100%, chi phí đã biết trước là
-#   (10.568.513 + 82 × 12.000) ÷ 982 = 11.764 đ/yêu cầu = 0,98× [simulated] > 9.600 đ. Bản cũ vì vậy chắc chắn kích
-#   cuối tuần 2 (2026-12-20), trước mốc giảm xem lại 2026-12-21: luật đo một điều đã biết, không phải tín hiệu mới.
+#   (1) Định nghĩa chi phí của luật dừng, dùng chung với event trong chi_so.md (tránh bỏ sót hoặc cộng trùng):
+#       C = [token + tool mọi lần chạy (agent_run_completed)
+#            + 2.000 đ × phút xem lại đo thật (staff_review_decision)
+#            + 2.000 đ × phút làm lại đo thật (staff_rework_completed; ca lam_lai KHÔNG cộng thêm 12.000 đ)
+#            + 12.000 đ × số yêu cầu có handoff_to_staff (mỗi yêu cầu tối đa một lần; không cộng phút xem lại, làm lại)]
+#           ÷ số refund_request_created của nhóm trợ lý trong phạm vi noi_dia + hang_nang, theo tuần.
+#       Trên dữ liệu chạy thử (lab13.py, B4): 34 ca chuyển nhân viên đều có 0 phút; 48 ca lam_lai đã có phút làm lại.
+#       Cách cũ cộng 12.000 đ cho cả 82 ca không thành công nên trùng 48 ca lam_lai (48 × 12.000 ÷ 982 ≈ 587 đ/yêu cầu).
+#       C hiện tại = (3.072.513 + 34 × 12.000) ÷ 982 = 3.544 đ = 0,30× [simulated].
+#   (2) Ngưỡng 9.600 đ chỉ gồm chi phí biến đổi, cùng mẫu số "mỗi yêu cầu trong phạm vi". Cố định quy đổi về cùng
+#       mẫu số: khối lượng một nửa 22.500 × 982/1.200 = 18.412 yêu cầu/tháng → 40.000.000 ÷ 18.412 = 2.172 đ/yêu cầu.
+#       9.600 + 2.172 = 11.772 đ = 0,98× của 12.000 đ: trần biến đổi để hoà vốn là 9.828 đ, ngưỡng chừa ~2% dư địa
+#       [simulated]. (Bản trước giải thích bằng 2.370 đ/việc thành công, khác mẫu số; đã bỏ.)
+#   (3) Luật chi phí chỉ áp từ bước 0.50. Bước 0.10 và 0.25 vẫn xem lại 100%, C đã biết trước là
+#       (10.568.513 + 34 × 12.000) ÷ 982 = 11.178 đ = 0,93× (11.794 đ = 0,98× nếu làm lại 15,3 phút) [simulated]
+#       > 9.600 đ: áp luật từ ngày đầu chỉ đo một điều đã biết. Hai bước đầu vẫn tính và báo C hằng tuần.
 #   Giữ nguyên ngưỡng 9.600 đ, thời hạn 2 tuần, hành động và người phụ trách. Luật an toàn, luật sổ cái và luật mức
 #   độ dùng vẫn áp từ ngày đầu. Giám đốc vận hành duyệt thay đổi này cùng lúc ký chấp nhận mức chênh 6 điểm
 #   (kiểm tra 2026-12-04).
@@ -81,15 +94,22 @@ pilot:
   stop_rules:
     - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng ≥ 2 điểm (tính chung hoặc riêng hang_nang), hoặc vượt 6% cho cả phạm vi TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút và chuyển toàn bộ về nhân viên tự làm KHÔNG THÌ không được sang bước rollout tiếp theo"
     - "NẾU có từ 1 ca hoàn tiền trùng hoặc sai số tiền phát hiện qua đối soát sổ cái TRONG bất kỳ ngày nào THÌ Kế toán trưởng khoá ghi sổ tự động trong 1 giờ, PM trợ lý hoàn phí rà trace_id trong 24 giờ KHÔNG THÌ không được bật lại ghi sổ tự động"
-    - "NẾU chi phí biến đổi cả hệ thống mỗi yêu cầu của nhóm trợ lý (token + tool + phút xem lại, làm lại đo thật + 12.000 đ cho mỗi ca không thành công) > 9.600 đ = 0,8× của 12.000 đ TRONG 2 tuần liên tiếp tính từ bước 0.50 (2026-12-21 đến 2026-12-27 và 2026-12-28 đến 2027-01-03; ở bước 0.10 và 0.25 chỉ ghi số hằng tuần, không áp luật này) THÌ PM trợ lý hoàn phí giảm xem lại theo bậc, thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở rộng sang loại yêu cầu khác"
+    - "NẾU chi phí biến đổi mỗi yêu cầu trong phạm vi của nhóm trợ lý theo định nghĩa C ở chú thích đầu file (token + tool mọi lần chạy + phút xem lại, làm lại đo thật + 12.000 đ chỉ cho yêu cầu có handoff_to_staff; ca lam_lai không cộng 12.000 đ) > 9.600 đ (cộng cố định 2.172 đ/yêu cầu ở một nửa khối lượng = 11.772 đ = 0,98× của 12.000 đ) TRONG 2 tuần liên tiếp tính từ bước 0.50 (2026-12-21 đến 2026-12-27 và 2026-12-28 đến 2027-01-03; ở bước 0.10 và 0.25 chỉ ghi số hằng tuần, không áp luật này) THÌ PM trợ lý hoàn phí giảm xem lại theo bậc, thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở rộng sang loại yêu cầu khác"
     - "NẾU tỉ lệ bỏ qua gợi ý (sửa + bỏ trên số được xem lại) > 40% (đợt chạy thử 21,1% trong phạm vi) TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên nhóm trợ lý trong 3 ngày KHÔNG THÌ không được chuyển bước rollout"
-  interim_looks: "chỉ kiểm tra chỉ số an toàn"
+  interim_looks: "chỉ kiểm tra chỉ số an toàn"   # áp cho phân tích hiệu quả chỉ số chính: không so chỉ số chính giữa hai nhóm trước khi khoá dữ liệu
+  operational_monitoring: "Hằng tuần, tách khỏi interim_looks: chi phí C, tỉ lệ bỏ qua gợi ý, hoàn trùng; dùng cho luật dừng chi phí, mức độ dùng và sổ cái"
   rollback: "Giám đốc vận hành bấm cờ tắt trợ lý, hiệu lực trong 30 phút; khách được phục vụ bằng luồng nhân viên tự làm như hiện tại (6 phút/yêu cầu)"
   decision_date: "2027-01-12"     # yêu cầu cuối của bước 0.50 (2027-01-03) cần đủ 7 ngày để biết có mở lại hay không
+  data_lock: >-
+    Nhận yêu cầu tới hết 2027-01-03; chờ tối đa 24 giờ để đóng (hết 2027-01-04); theo dõi mở lại 7 ngày sau khi đóng
+    (hết 2027-01-11); khoá dữ liệu và quyết định 2027-01-12. Chỉ quyết định nếu mỗi nhân viên ở cả hai nhánh có
+    ≥ 299 yêu cầu hợp lệ (dự báo ≈ 430, khoảng 898 hiệu dụng mỗi nhánh); nếu thiếu thì kéo dài thu nhận và lùi
+    ngày quyết định tương ứng, không rút ngắn 7 ngày theo dõi.
   simulated_inputs:
     - "phut_xem_lai_simulated, phut_lam_lai_simulated (logix_requests.csv)"
     - "Chi phí mỗi việc thành công 4.472 đ toàn mẫu; 3.414 đ trong phạm vi; 4.599 đ khi cộng cố định 40 triệu đ/tháng"
     - "Cả hệ thống trong phạm vi 4.131 đ/yêu cầu = 0,34× của 12.000 đ; theo loại 0,26× noi_dia, 0,77× hang_nang"
-    - "Ngưỡng dừng chi phí 9.600 đ/yêu cầu: chừa 2.370 đ/việc chi phí cố định khi khối lượng còn một nửa (A4), tổng ≈ 12.000 đ"
+    - "Ngưỡng dừng chi phí 9.600 đ/yêu cầu (chỉ biến đổi) + cố định 2.172 đ/yêu cầu ở một nửa khối lượng = 11.772 đ = 0,98×"
+    - "Chi phí C theo định nghĩa luật dừng: 3.544 đ/yêu cầu (chạy thử); 11.178 đ hoặc 11.794 đ/yêu cầu khi xem lại 100%"
     - "B4 xem lại 100%: 11.743 đ = 0,98× (12.415 đ = 1,03× nếu làm lại 15,3 phút/ca)"
     - "Toàn bộ dữ liệu logix_runs.csv, logix_requests.csv là giả lập của lab"

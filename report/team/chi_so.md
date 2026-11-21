@@ -39,7 +39,18 @@ Mười một event, mỗi event có `trace_id` để nối với trace của ag
 - **An toàn (lỗi lọt đến khách):** số `ticket_reopened` trong 7 ngày chia số `refund_request_created`.
 - **Dùng tự đề xuất:** `agent_suggestion_shown` chia `refund_request_created` trong phạm vi, tách theo `arm`.
 - **An toàn tự đề xuất:** `audit_sample_checked` có so_tien_da_hoan khác so_tien_dung, chia số đơn được kiểm.
-- **Luật dừng của pilot cũng tính được từ event:** chi phí cả hệ thống mỗi yêu cầu lấy từ `agent_run_completed` (token, tool), `staff_review_decision` và `staff_rework_completed` (phút đo thật thay cho cột `_simulated`), cộng 12.000 đ cho mỗi `handoff_to_staff`. Hoàn trùng lấy từ `refund_ledger_write` có ket_qua = trung hoặc hai lệnh cùng ma_van_don trong 24 giờ.
+- **Luật dừng chi phí tính được từ event, cùng định nghĩa C với `pilot_plan.yaml`:**
+
+  | Thành phần của C (mỗi tuần, nhóm trợ lý, phạm vi noi_dia + hang_nang) | Event | Quy tắc tránh bỏ sót, cộng trùng |
+  | --- | --- | --- |
+  | Token + tool | `agent_run_completed` | Mọi lần chạy, kể cả status = loi |
+  | Xem lại | `staff_review_decision` (phut_xem_lai × 2.000 đ) | Không tính cho yêu cầu đã có `handoff_to_staff` |
+  | Làm lại (ca lam_lai) | `staff_rework_completed` (phut_lam_lai × 2.000 đ) | Chỉ tính phút đo thật, **không** cộng 12.000 đ |
+  | Nhân viên làm thay (ca chuyển nhân viên) | `handoff_to_staff` | 12.000 đ, mỗi request_id tối đa một lần; không cộng phút xem lại, làm lại |
+  | Mẫu số | `refund_request_created` có arm = tro_ly, loai thuộc phạm vi | Mỗi request_id đếm một lần |
+
+  Ngưỡng 9.600 đ chỉ gồm chi phí biến đổi; cố định quy đổi cùng mẫu số là 2.172 đ/yêu cầu ở một nửa khối lượng (40.000.000 ÷ 18.412), tổng 11.772 đ = 0,98× [simulated]. Trên dữ liệu chạy thử, C = (3.072.513 + 34 × 12.000) ÷ 982 = 3.544 đ/yêu cầu [simulated] (`python lab13.py`, mục B4).
+- **Hoàn trùng:** `refund_ledger_write` có ket_qua = trung, hoặc hai lệnh cùng ma_van_don trong 24 giờ.
 
 ## E2 · Rủi ro kinh tế
 

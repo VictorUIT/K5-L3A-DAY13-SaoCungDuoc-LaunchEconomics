@@ -403,11 +403,38 @@ def in_bang_b(runs, reqs):
               f"{vn(h['token_tool'])} đ → {vn(h['tong'])} / {h['thanh_cong']} = {vn(h['cps'])} đ "
               f"= {vn(h['cps'] / BASELINE, 2)}×; xem lại chiếm {vn(h['tien_xem'] / h['tong'] * 100, 1)}%; "
               f"hoà vốn khi mỗi lần xem lại ≤ {vn(h['phut_xem_hoa_von'], 1)} phút")
-        khong_tc = h['so_yeu_cau'] - h['thanh_cong']
-        ca_he_thong = (h['tong'] + khong_tc * BASELINE) / h['so_yeu_cau']
-        print(f"    cả hệ thống = ({vn(h['tong'])} + {khong_tc} × 12.000) / {h['so_yeu_cau']} = {vn(ca_he_thong)} đ/yêu cầu "
-              f"= {vn(ca_he_thong / BASELINE, 2)}× (luật dừng chi phí 9.600 đ = 0,8×)")
+    in_chi_phi_luat_dung(runs, reqs, b4)
     return dict(goc=goc, b1=b1, b2=cap, xep_hang=xep_hang, b3=b3, b4=b4)
+
+
+NGUONG_LUAT_CHI_PHI = 9600  # đồng / yêu cầu trong phạm vi, chỉ chi phí biến đổi (pilot_plan.yaml, luật dừng chi phí)
+
+
+def chi_phi_luat_dung(tong, reqs_pham_vi, baseline=BASELINE):
+    """Định nghĩa chung cho luật dừng chi phí (pilot_plan.yaml) và event (chi_so.md), tránh cộng trùng:
+    [token + tool mọi lần chạy + phút xem lại, làm lại × lương  (đã nằm trong `tong`)
+     + 12.000 đ × số yêu cầu chuyển nhân viên (event handoff_to_staff; các ca này 0 phút xem lại, làm lại)]
+    ÷ số yêu cầu trong phạm vi. Ca lam_lai chỉ tính phút làm lại, KHÔNG cộng thêm 12.000 đ."""
+    chuyen = int((reqs_pham_vi['ket_qua'] == 'chuyen_nhan_vien').sum())
+    return chuyen, (tong + chuyen * baseline) / len(reqs_pham_vi)
+
+
+def in_chi_phi_luat_dung(runs, reqs, b4):
+    pv = reqs[reqs['loai'].isin(PHAM_VI_PILOT)]
+    yc_thang_nua = KHOI_LUONG_THANG / 2 * len(pv) / len(reqs)          # yêu cầu trong phạm vi / tháng, một nửa khối lượng
+    co_dinh_yc = CO_DINH_THANG / yc_thang_nua
+    print(f"\n  Chi phí theo định nghĩa của luật dừng (mỗi yêu cầu trong phạm vi; ca lam_lai chỉ tính phút làm lại, "
+          f"12.000 đ chỉ cho ca chuyển nhân viên) (simulated)")
+    for nhan, tong in (('Đợt chạy thử (xem lại như dữ liệu)', mo_hinh(runs, pv)['tong']),
+                       ('Xem lại 100%, làm lại 9 phút', b4[0]['tong']),
+                       (f"Xem lại 100%, làm lại {vn(b4[1]['phut_lam'], 1)} phút", b4[1]['tong'])):
+        chuyen, c = chi_phi_luat_dung(tong, pv)
+        print(f"    {nhan:38s} ({vn(tong)} + {chuyen} × 12.000) / {len(pv)} = {vn(c)} đ/yêu cầu = {vn(c / BASELINE, 2)}× "
+              f"→ {'VƯỢT' if c > NGUONG_LUAT_CHI_PHI else 'dưới'} ngưỡng {vn(NGUONG_LUAT_CHI_PHI)} đ")
+    print(f"    Cố định cùng mẫu số: {vn(CO_DINH_THANG)} / ({vn(KHOI_LUONG_THANG / 2)} × {len(pv)}/{len(reqs)} = "
+          f"{vn(yc_thang_nua)} yêu cầu/tháng) = {vn(co_dinh_yc)} đ/yêu cầu; ngưỡng {vn(NGUONG_LUAT_CHI_PHI)} + "
+          f"{vn(co_dinh_yc)} = {vn(NGUONG_LUAT_CHI_PHI + co_dinh_yc)} đ = {vn((NGUONG_LUAT_CHI_PHI + co_dinh_yc) / BASELINE, 2)}× "
+          f"(trần biến đổi để hoà vốn: {vn(BASELINE - co_dinh_yc)} đ)")
 
 
 # ---------- Nhiệm vụ D1 · Cỡ mẫu ----------
