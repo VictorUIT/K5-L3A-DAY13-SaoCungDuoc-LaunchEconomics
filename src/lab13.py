@@ -81,6 +81,13 @@ def kiem_tra_bien_a1():
     print('Phép thử biên A1: ĐẠT')
 
 
+def in_bang_a1():
+    """In giá trị của ba phép thử để chép vào bảng A1 (phép thử nằm ở kiem_tra_dap_an_biet_truoc)."""
+    print(f'  A1 (p = 0,8): tối đa 2 lần → {vn(so_lan_chay_ky_vong(0.8, 2), 2)} lần chạy · '
+          f'đến khi đúng → {vn(so_lan_chay_ky_vong(0.8), 2)} lần chạy · '
+          f'hệ số chi phí, tối đa 3 lần → {vn(he_so_chi_phi_moi_viec_thanh_cong(0.8, 3), 2)}')
+
+
 # ---------- Nhiệm vụ A2 · Mô hình chi phí từ trace ----------
 # CP1: mo_hinh đã viết xong; CP2 gọi lại hàm này với tham số giá và hệ số đã đổi.
 COT_RUNS = ('run_id', 'request_id', 'attempt', 'tokens_in', 'tokens_out', 'tool_calls', 'status')
@@ -167,7 +174,8 @@ def in_bang_a2(kq, baseline=BASELINE):
         print(f'  {nhan:32s} {vn(kq[khoa], so_le):>12s}  {ghi_chu}')
     print(f"  Chi phí mỗi việc thành công / hoá đơn mỗi yêu cầu = {vn(kq['cps'] / kq['hoa_don_moi_yc'], 1)} lần")
     print(f"  Tỉ trọng: làm lại {vn(kq['lam_lai'] / kq['tong'] * 100, 1)}%, xem lại {vn(kq['xem_lai'] / kq['tong'] * 100, 1)}%, "
-          f"token {vn(kq['token'] / kq['tong'] * 100, 1)}%, tool {vn(kq['tool'] / kq['tong'] * 100, 1)}%; "
+          f"token {vn(kq['token'] / kq['tong'] * 100, 1)}%, tool {vn(kq['tool'] / kq['tong'] * 100, 1)}% "
+          f"(token + tool {vn((kq['token'] + kq['tool']) / kq['tong'] * 100, 1)}%); "
           f"giờ nhân viên {vn(nv / kq['tong'] * 100, 1)}% (simulated)")
     print(f"  Cả hệ thống / yêu cầu = (tổng + {kq['khong_thanh_cong']} ca không thành công × {vn(baseline)}) / "
           f"{vn(kq['so_yeu_cau'])} = {vn(ca_he_thong)} đ = {vn(ca_he_thong / baseline, 2)}× baseline (simulated)")
@@ -182,13 +190,14 @@ def tach_theo_loai(runs, reqs, baseline=BASELINE):
     hang = []
     for loai in LOAI:
         kq = mo_hinh(runs, reqs[reqs['loai'] == loai])
+        n = kq['so_yeu_cau'] or math.nan  # loại vắng mặt trong tập con → nan, không chia cho 0
         hang.append(dict(loai=loai, so_yeu_cau=kq['so_yeu_cau'], thanh_cong=kq['thanh_cong'],
-                         ti_le_thanh_cong=kq['thanh_cong'] / kq['so_yeu_cau'],
-                         lan_chay_moi_yc=kq['so_run'] / kq['so_yeu_cau'],
+                         ti_le_thanh_cong=kq['thanh_cong'] / n,
+                         lan_chay_moi_yc=kq['so_run'] / n,
                          tong=kq['tong'], cps=kq['cps'], so_voi_baseline=kq['cps'] / baseline,
                          chay_lai=kq['chay_lai'], token_tool=kq['token'] + kq['tool'],
                          # cả hệ thống: cộng 12.000 đ cho mỗi yêu cầu không thành công vì nhân viên làm thay
-                         ca_he_thong_moi_yc=(kq['tong'] + kq['khong_thanh_cong'] * baseline) / kq['so_yeu_cau']))
+                         ca_he_thong_moi_yc=(kq['tong'] + kq['khong_thanh_cong'] * baseline) / n))
     return pd.DataFrame(hang).set_index('loai')
 
 
@@ -213,8 +222,10 @@ def in_bang_a3(runs, reqs):
               f" {vn(h['chay_lai'])}/{vn(h['token_tool'])} = {vn(h['chay_lai'] / h['token_tool'] * 100, 0)}%")
     print('  Kết quả theo loại (số yêu cầu)')
     kq_loai = pd.crosstab(reqs['loai'], reqs['ket_qua']).reindex(list(LOAI)).fillna(0)
+    kq_loai.loc['tổng'] = kq_loai.sum()
     for loai, h in kq_loai.iterrows():
-        print(f"  {loai:10s} " + '  '.join(f'{c}: {h.get(c, 0):.0f}' for c in ('thanh_cong', 'lam_lai', 'chuyen_nhan_vien')))
+        print(f"  {loai:10s} " + '  '.join(f'{c}: {h.get(c, 0):.0f}' for c in ('thanh_cong', 'lam_lai', 'chuyen_nhan_vien'))
+              + f"  → không thành công: {h.get('lam_lai', 0) + h.get('chuyen_nhan_vien', 0):.0f}")
     ti_le, so_run = ti_le_ok_theo_lan_thu(runs, reqs)
     print('  Tỉ lệ lần chạy ok theo lần thử (số lần ok / số lần chạy trong ngoặc)')
     for loai in LOAI:
@@ -244,7 +255,7 @@ def chi_phi_co_dinh(runs, reqs, khoi_luong=KHOI_LUONG_THANG, co_dinh=CO_DINH_THA
     """Cộng chi phí cố định vào chi phí mỗi việc thành công trong phạm vi pilot.
     Ngoại suy: việc thành công/tháng = khối lượng × (thành công trong phạm vi ÷ TOÀN BỘ mẫu)."""
     kq = mo_hinh(runs, reqs[reqs['loai'].isin(pham_vi)])
-    ti_le = kq['thanh_cong'] / len(reqs)
+    ti_le = kq['thanh_cong'] / len(reqs) if len(reqs) else 0.0  # mẫu rỗng → 0 việc/tháng → cố định = inf
     viec_thang = khoi_luong * ti_le
     co_dinh_moi_viec = co_dinh / viec_thang if viec_thang else math.inf
     tong_moi_viec = kq['cps'] + co_dinh_moi_viec
@@ -275,6 +286,7 @@ if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
     kiem_tra_dap_an_biet_truoc()
+    in_bang_a1()
     kiem_tra_bien_a1()
     kiem_tra_du_lieu(runs, reqs)
     ket_qua = mo_hinh(runs, reqs)
