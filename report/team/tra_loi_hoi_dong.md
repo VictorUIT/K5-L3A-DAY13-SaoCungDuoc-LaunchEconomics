@@ -31,4 +31,4 @@ Xem lại 100% thì trợ lý gần như không tiết kiệm được so với 
 3. Mục tiêu thời gian: mỗi lần xem lại ≤ 5,1 phút (làm lại 9 phút) hoặc ≤ 4,8 phút (làm lại 15,3 phút) để hoà vốn; đo phút thật bằng event `staff_review_decision` từ tuần 1, thay số simulated.
 4. Luật an toàn (mở lại 7 ngày) vẫn áp dụng ngay từ tuần đầu, không thay đổi.
 
-Nhóm sẽ cập nhật `pilot_plan.yaml` (luật chi phí "TRONG 2 tuần liên tiếp kể từ bước 0.50") và điều kiện tương ứng trong `ho_so_launch_v0.md`.
+Đã cập nhật `pilot_plan.yaml`: luật chi phí ghi "TRONG 2 tuần liên tiếp tính từ bước 0.50 (2026-12-21 đến 2027-01-03)", kèm chú thích "Thay đổi thiết kế sau phản biện hội đồng". Đã cập nhật điều kiện tương ứng trong `ho_so_launch_v0.md`. Ngưỡng 9.600 đ, thời hạn 2 tuần, hành động và người phụ trách giữ nguyên. Đây là thay đổi thiết kế trước ngày bắt đầu 2026-12-07, khi chưa có dữ liệu pilot, nên không phải đổi luật sau khi xem kết quả.

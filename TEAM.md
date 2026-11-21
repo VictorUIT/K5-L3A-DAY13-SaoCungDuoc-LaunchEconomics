@@ -5,7 +5,7 @@
 - Tên nhóm: SaoCungDuoc
 - Lớp: L3A
 - Repo nhóm: `K5-L3A-DAY13-SaoCungDuoc-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt: https://github.com/VictorUIT/K5-L3A-DAY13-SaoCungDuoc-LaunchEconomics · nhánh `main` · commit chốt: [CẦN ĐIỀN sau khi push bản cuối]
+- URL repo, nhánh nộp, commit chốt: https://github.com/VictorUIT/K5-L3A-DAY13-SaoCungDuoc-LaunchEconomics · nhánh `main` · commit chốt: commit được gắn tag `lab13-nop` trên `main` (SHA ghi kèm link nộp trên LMS)
 
 ## Thành viên
 

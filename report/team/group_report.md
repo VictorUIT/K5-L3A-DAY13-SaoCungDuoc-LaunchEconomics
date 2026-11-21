@@ -17,7 +17,7 @@ Quyết định ở Gate 2a có nên cho trợ lý hoàn phí LogiX-VN chạy pi
 - **A · Chi phí mỗi việc thành công** ([bang_chi_phi.md](bang_chi_phi.md)): `mo_hinh` cộng token + tool của mọi lần chạy (kể cả lần lỗi) với tiền xem lại, làm lại, rồi chia cho số việc `thanh_cong`. Tách theo 4 loại; cộng chi phí cố định 40 triệu đ/tháng cho noi_dia + hang_nang.
 - **B · Độ nhạy** ([bang_chi_phi.md](bang_chi_phi.md)): gọi lại `mo_hinh` cho 9 kịch bản đổi từng yếu tố, 1 cặp, giới hạn 1/2/3 lần chạy (tính cả chi phí hệ thống), xem lại 100%.
 - **C · Bảng lỗi** ([bang_loi.md](bang_loi.md)): hai bộ nhãn cho 20 ca theo 5 loại của Google PAIR, quy tắc cho ca lệch, bảng khắc phục 5 ca có ngưỡng đo được và một vai trò phụ trách.
-- **D · Pilot** ([pilot_plan.yaml](pilot_plan.yaml)): tính năm câu D1 trong `lab13.py` trước, rồi chọn chia theo nhân viên 20 + 20, ngẫu nhiên, phân tầng theo depot. Có 4 luật dừng NẾU – TRONG – THÌ – KHÔNG THÌ.
+- **D · Pilot** ([pilot_plan.yaml](pilot_plan.yaml)): tính năm câu D1 trong `lab13.py` trước, rồi chọn chia theo nhân viên 20 + 20, ngẫu nhiên, phân tầng theo depot. Có 4 luật dừng NẾU – TRONG – THÌ – KHÔNG THÌ. Sau phản biện hội đồng, luật chi phí 9.600 đ chỉ áp từ bước 0.50, xem [tra_loi_hoi_dong.md](tra_loi_hoi_dong.md).
 - **E · Chỉ số và hồ sơ** ([chi_so.md](chi_so.md), [ho_so_launch_v0.md](ho_so_launch_v0.md)): ba chỉ số tính thử, 11 event có `trace_id`, 5 rủi ro kinh tế lấy số từ B, hồ sơ 7 mục.
 
 ## 4. Kết quả
@@ -31,7 +31,9 @@ Quyết định ở Gate 2a có nên cho trợ lý hoàn phí LogiX-VN chạy pi
   - 20 nhân viên mỗi nhóm chỉ đạt tối đa 1.000 mẫu hiệu dụng, dưới mức 1.251 cần cho chênh 5 điểm. Nhóm chấp nhận mức chênh 6 điểm, nên power chỉ còn 0,64 nếu tác động thật là 5 điểm.
 - Chỉ số trong đợt chạy thử: chính 82,83%, bỏ qua gợi ý 27,12%, mở lại 7 ngày 4,25%. Đợt chạy thử không có đối chứng nên các số này chưa nói lên tác động của trợ lý.
 - **Đề xuất: Go có điều kiện**, chỉ cho noi_dia + hang_nang. Các điều kiện kèm người phụ trách và ngày kiểm tra nằm trong `ho_so_launch_v0.md`.
-- Kết quả duyệt chéo nhóm nhận được từ hội đồng: [CẦN ĐIỀN: tên nhóm hội đồng, điểm, quyết định, câu hỏi].
+- Kết quả duyệt chéo nhóm nhận được từ hội đồng:
+  - Câu hỏi nhận được: "Nếu tuần đầu phải xem lại 100%, chi phí mỗi việc thành công là bao nhiêu, và luật dừng chi phí 8.000 đ trong `pilot_plan.yaml` có tự kích hoạt ngay không?" Nhóm trả lời trong [tra_loi_hoi_dong.md](tra_loi_hoi_dong.md).
+  - Nhóm hội đồng, điểm ba tiêu chí, quyết định: [CHỜ NHÓM ĐIỀN theo phiếu của nhóm hội đồng].
 
 ## 5. Khó khăn và cách xử lý
 

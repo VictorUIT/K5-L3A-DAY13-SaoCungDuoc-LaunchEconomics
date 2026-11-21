@@ -403,6 +403,10 @@ def in_bang_b(runs, reqs):
               f"{vn(h['token_tool'])} đ → {vn(h['tong'])} / {h['thanh_cong']} = {vn(h['cps'])} đ "
               f"= {vn(h['cps'] / BASELINE, 2)}×; xem lại chiếm {vn(h['tien_xem'] / h['tong'] * 100, 1)}%; "
               f"hoà vốn khi mỗi lần xem lại ≤ {vn(h['phut_xem_hoa_von'], 1)} phút")
+        khong_tc = h['so_yeu_cau'] - h['thanh_cong']
+        ca_he_thong = (h['tong'] + khong_tc * BASELINE) / h['so_yeu_cau']
+        print(f"    cả hệ thống = ({vn(h['tong'])} + {khong_tc} × 12.000) / {h['so_yeu_cau']} = {vn(ca_he_thong)} đ/yêu cầu "
+              f"= {vn(ca_he_thong / BASELINE, 2)}× (luật dừng chi phí 9.600 đ = 0,8×)")
     return dict(goc=goc, b1=b1, b2=cap, xep_hang=xep_hang, b3=b3, b4=b4)
 
 

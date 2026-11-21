@@ -33,6 +33,14 @@
 #   Không dùng ngưỡng tuyệt đối 3% (pilot sẽ dừng ngay tuần đầu). Ngưỡng: nhóm trợ lý cao hơn đối chứng ≥ 2 điểm,
 #   hoặc vượt trần tuyệt đối 6% cho cả phạm vi. hang_nang đã ở 8,23% trong đợt chạy thử nên chỉ so với đối chứng
 #   cùng loại (≥ 2 điểm), không dùng trần 6% cho riêng loại này.
+#
+# Thay đổi thiết kế sau phản biện hội đồng Gate 2a (2026-11-21, trước ngày bắt đầu, chưa có dữ liệu pilot):
+#   Luật chi phí 9.600 đ chỉ áp từ bước 0.50. Lý do: bước 0.10 và 0.25 vẫn xem lại 100%, chi phí đã biết trước là
+#   (10.568.513 + 82 × 12.000) ÷ 982 = 11.764 đ/yêu cầu = 0,98× [simulated] > 9.600 đ. Bản cũ vì vậy chắc chắn kích
+#   cuối tuần 2 (2026-12-20), trước mốc giảm xem lại 2026-12-21: luật đo một điều đã biết, không phải tín hiệu mới.
+#   Giữ nguyên ngưỡng 9.600 đ, thời hạn 2 tuần, hành động và người phụ trách. Luật an toàn, luật sổ cái và luật mức
+#   độ dùng vẫn áp từ ngày đầu. Giám đốc vận hành duyệt thay đổi này cùng lúc ký chấp nhận mức chênh 6 điểm
+#   (kiểm tra 2026-12-04). Chi tiết: tra_loi_hoi_dong.md.
 
 pilot:
   owner: "Giám đốc vận hành LogiX-VN"
@@ -73,7 +81,7 @@ pilot:
   stop_rules:
     - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng ≥ 2 điểm (tính chung hoặc riêng hang_nang), hoặc vượt 6% cho cả phạm vi TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút và chuyển toàn bộ về nhân viên tự làm KHÔNG THÌ không được sang bước rollout tiếp theo"
     - "NẾU có từ 1 ca hoàn tiền trùng hoặc sai số tiền phát hiện qua đối soát sổ cái TRONG bất kỳ ngày nào THÌ Kế toán trưởng khoá ghi sổ tự động trong 1 giờ, PM trợ lý hoàn phí rà trace_id trong 24 giờ KHÔNG THÌ không được bật lại ghi sổ tự động"
-    - "NẾU chi phí biến đổi cả hệ thống mỗi yêu cầu của nhóm trợ lý (token + tool + phút xem lại, làm lại đo thật + 12.000 đ cho mỗi ca không thành công) > 9.600 đ = 0,8× của 12.000 đ TRONG 2 tuần liên tiếp THÌ PM trợ lý hoàn phí giảm xem lại theo bậc, thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở rộng sang loại yêu cầu khác"
+    - "NẾU chi phí biến đổi cả hệ thống mỗi yêu cầu của nhóm trợ lý (token + tool + phút xem lại, làm lại đo thật + 12.000 đ cho mỗi ca không thành công) > 9.600 đ = 0,8× của 12.000 đ TRONG 2 tuần liên tiếp tính từ bước 0.50 (2026-12-21 đến 2026-12-27 và 2026-12-28 đến 2027-01-03; ở bước 0.10 và 0.25 chỉ ghi số hằng tuần, không áp luật này) THÌ PM trợ lý hoàn phí giảm xem lại theo bậc, thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở rộng sang loại yêu cầu khác"
     - "NẾU tỉ lệ bỏ qua gợi ý (sửa + bỏ trên số được xem lại) > 40% (đợt chạy thử 21,1% trong phạm vi) TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên nhóm trợ lý trong 3 ngày KHÔNG THÌ không được chuyển bước rollout"
   interim_looks: "chỉ kiểm tra chỉ số an toàn"
   rollback: "Giám đốc vận hành bấm cờ tắt trợ lý, hiệu lực trong 30 phút; khách được phục vụ bằng luồng nhân viên tự làm như hiện tại (6 phút/yêu cầu)"

@@ -30,7 +30,7 @@
 - Commit `05deb26`: `pilot_plan.yaml`, `ho_so_launch_v0.md`, `chi_so.md`, `phieu_cham.md`.
 - Commit `a8abdd7` (ghép nhánh P1) và `f913894` (sửa UTF-8, cờ `--write`).
 - Cột "Nhãn người 2" trong `report/team/bang_loi.md`.
-- Tự kiểm tra: `python lab13.py` chạy hết, ba phép thử ĐẠT; `pilot_plan.yaml` đọc được bằng `yaml.safe_load` và không còn dấu `?` ngoài chú thích; không có từ "production" trong `report/team/`.
+- Tự kiểm tra: `python lab13.py` chạy hết, ba phép thử ĐẠT; `pilot_plan.yaml` đọc được bằng `yaml.safe_load` và không còn dấu `?` ngoài chú thích; không có từ bị cấm theo quy tắc 5 của `README.md` trong `report/team/`.
 
 ## 5. Công cụ AI đã dùng
 
