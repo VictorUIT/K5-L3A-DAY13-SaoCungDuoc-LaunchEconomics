@@ -5,14 +5,16 @@ Never imports or changes P1's src/lab13.py unless --compare-p1 is explicitly set
 Never modifies source CSV data. Calculated evidence comes from CSV at execution.
 
 Run at repo root:
-    python tools/p2_verify.py --src src --out report/team
-    python tools/p2_verify.py --src src --out report/team --compare-p1
+    python tools/p2_verify.py --src src --out report/team                       # chỉ in, không ghi file
+    python tools/p2_verify.py --src src --out report/team --compare-p1          # chỉ in, kèm so P1
+    python tools/p2_verify.py --src src --out report/team --compare-p1 --write  # ghi ĐÈ 3 file báo cáo
 """
 from __future__ import annotations
 import argparse
 import importlib.util
 import json
 import math
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import NormalDist
@@ -379,9 +381,14 @@ def main(argv=None):
     p.add_argument('--src',type=Path,default=Path('src'),help='Thư mục có 2 CSV gốc')
     p.add_argument('--out',type=Path,default=Path('report/team'),help='Thư mục report/team')
     p.add_argument('--compare-p1',action='store_true',help='Chỉ bật sau khi P1 hoàn thành src/lab13.py')
-    p.add_argument('--no-write',action='store_true',help='Chỉ in bảng kiểm mà không ghi file')
+    p.add_argument('--write',action='store_true',
+                   help='Ghi ĐÈ bang_chi_phi.md, p2_doi_chieu_so.md, p2_ket_qua.json trong --out '
+                        '(mặc định chỉ in, không ghi; bang_chi_phi.md đang chứa lập luận A1–A4 của P1)')
+    p.add_argument('--no-write',action='store_true',help='Giữ để tương thích lệnh cũ; đây đã là mặc định')
     p.add_argument('--strict',action='store_true',help='Exit code 2 nếu bất kỳ số tham chiếu nào lệch quá 2%')
     args=p.parse_args(argv)
+    if args.write and args.no_write:
+        p.error('--write và --no-write không dùng cùng lúc')
     runs,reqs=read_data(args.src)
     x=calculate(runs,reqs)
     checks=compare_reference(x)
@@ -396,7 +403,9 @@ def main(argv=None):
         p1=compare_p1(args.src,x,runs,reqs)
         print('So P1:',p1['status'])
         if 'message' in p1:print('  ',p1['message'])
-    if not args.no_write:
+    if not args.write:
+        print('Chưa ghi file (thêm --write để ghi đè báo cáo trong --out).')
+    else:
         args.out.mkdir(parents=True,exist_ok=True)
         (args.out/'bang_chi_phi.md').write_text(make_official_report(x),encoding='utf-8')
         (args.out/'p2_doi_chieu_so.md').write_text(make_check_report(x,checks,p1),encoding='utf-8')
@@ -413,4 +422,6 @@ def main(argv=None):
     return 0
 
 if __name__=='__main__':
+    for _s in (sys.stdout,sys.stderr):  # console Windows (cp1252) không in được tiếng Việt
+        if hasattr(_s,'reconfigure'):_s.reconfigure(encoding='utf-8')
     raise SystemExit(main())

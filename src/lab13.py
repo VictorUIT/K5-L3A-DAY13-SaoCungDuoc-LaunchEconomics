@@ -5,6 +5,7 @@ Bản gốc chưa sửa nằm ở lab13_starter.py.
 """
 import math
 import numbers
+import sys
 import pandas as pd
 
 # Bảng giá GIẢ ĐỊNH của lab (không phải giá thật của nhà cung cấp nào)
@@ -283,6 +284,9 @@ def in_bang_a4(runs, reqs):
 
 
 if __name__ == '__main__':
+    for _s in (sys.stdout, sys.stderr):  # console Windows (cp1252) không in được tiếng Việt
+        if hasattr(_s, 'reconfigure'):
+            _s.reconfigure(encoding='utf-8')
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
     kiem_tra_dap_an_biet_truoc()
