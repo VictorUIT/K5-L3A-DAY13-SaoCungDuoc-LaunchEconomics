@@ -66,8 +66,7 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Đóng góp cụ thể
 
 - Soát CP1, CP2 theo "Xong khi": số A2, A3, A4, B1–B4 khớp số đối chiếu; báo nhóm `TODO CP2` trong `src/lab13.py` chưa viết và B4 thiếu câu "pilot cần học được gì".
-- Bộ nhãn người 1 cho 20 ca lỗi (ND 4 · HT 5 · NC 4 · GH 4 · NG 3), gắn bằng agent AI theo cho phép của giảng viên.
-
+- Bộ nhãn người 1 cho 20 ca lỗi (ND 4 · HT 5 · NC 4 · GH 4 · NG 3).
 ### Bằng chứng
 
 - [Báo cáo cá nhân](report/team/2A202603621_DoPhuongNam.md), cột "Nhãn người 1" trong [bảng lỗi](report/team/bang_loi.md).
