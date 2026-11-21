@@ -42,4 +42,4 @@
 
 - Làm được: CP4 và CP5 đủ yêu cầu "Xong khi"; hồ sơ nêu cả con số bất lợi (power 0,64; xem lại 100% là 0,98–1,03×; hang_nang mở lại 8,23%) kèm cách xử lý thay vì chỉ nêu số thuận lợi.
 - Rút ra: ngưỡng dừng phải đặt sau khi nhìn tỉ lệ hiện tại và kịch bản xấu nhất của chính nhóm, nếu không luật dừng sẽ kích ngay tuần đầu; một kế hoạch đủ cỡ mẫu trên giấy vẫn cần lịch đủ dài để mỗi cụm đạt số yêu cầu tối thiểu.
-- Cần cải thiện: luật dừng chi phí 9.600 đ/yêu cầu sẽ kích hết tuần 2 nếu vẫn xem lại 100% (11.764 đ/yêu cầu [simulated]), trước mốc giảm xem lại theo bậc; hội đồng đã hỏi đúng điểm này (xem `tra_loi_hoi_dong.md`).
+- Cần cải thiện: luật dừng chi phí 9.600 đ/yêu cầu sẽ kích hết tuần 2 nếu vẫn xem lại 100% (11.764 đ/yêu cầu [simulated]), trước mốc giảm xem lại theo bậc; hội đồng đã hỏi đúng điểm này và nhóm đã sửa để luật chỉ áp từ bước 0.50.

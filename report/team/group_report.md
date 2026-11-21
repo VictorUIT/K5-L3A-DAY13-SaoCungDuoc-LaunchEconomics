@@ -17,7 +17,7 @@ Quyết định ở Gate 2a có nên cho trợ lý hoàn phí LogiX-VN chạy pi
 - **A · Chi phí mỗi việc thành công** ([bang_chi_phi.md](bang_chi_phi.md)): `mo_hinh` cộng token + tool của mọi lần chạy (kể cả lần lỗi) với tiền xem lại, làm lại, rồi chia cho số việc `thanh_cong`. Tách theo 4 loại; cộng chi phí cố định 40 triệu đ/tháng cho noi_dia + hang_nang.
 - **B · Độ nhạy** ([bang_chi_phi.md](bang_chi_phi.md)): gọi lại `mo_hinh` cho 9 kịch bản đổi từng yếu tố, 1 cặp, giới hạn 1/2/3 lần chạy (tính cả chi phí hệ thống), xem lại 100%.
 - **C · Bảng lỗi** ([bang_loi.md](bang_loi.md)): hai bộ nhãn cho 20 ca theo 5 loại của Google PAIR, quy tắc cho ca lệch, bảng khắc phục 5 ca có ngưỡng đo được và một vai trò phụ trách.
-- **D · Pilot** ([pilot_plan.yaml](pilot_plan.yaml)): tính năm câu D1 trong `lab13.py` trước, rồi chọn chia theo nhân viên 20 + 20, ngẫu nhiên, phân tầng theo depot. Có 4 luật dừng NẾU – TRONG – THÌ – KHÔNG THÌ. Sau phản biện hội đồng, luật chi phí 9.600 đ chỉ áp từ bước 0.50, xem [tra_loi_hoi_dong.md](tra_loi_hoi_dong.md).
+- **D · Pilot** ([pilot_plan.yaml](pilot_plan.yaml)): tính năm câu D1 trong `lab13.py` trước, rồi chọn chia theo nhân viên 20 + 20, ngẫu nhiên, phân tầng theo depot. Có 4 luật dừng NẾU – TRONG – THÌ – KHÔNG THÌ. Sau phản biện hội đồng, luật chi phí 9.600 đ chỉ áp từ bước 0.50 (lý do ghi trong chú thích đầu `pilot_plan.yaml`).
 - **E · Chỉ số và hồ sơ** ([chi_so.md](chi_so.md), [ho_so_launch_v0.md](ho_so_launch_v0.md)): ba chỉ số tính thử, 11 event có `trace_id`, 5 rủi ro kinh tế lấy số từ B, hồ sơ 7 mục.
 
 ## 4. Kết quả
@@ -32,8 +32,10 @@ Quyết định ở Gate 2a có nên cho trợ lý hoàn phí LogiX-VN chạy pi
 - Chỉ số trong đợt chạy thử: chính 82,83%, bỏ qua gợi ý 27,12%, mở lại 7 ngày 4,25%. Đợt chạy thử không có đối chứng nên các số này chưa nói lên tác động của trợ lý.
 - **Đề xuất: Go có điều kiện**, chỉ cho noi_dia + hang_nang. Các điều kiện kèm người phụ trách và ngày kiểm tra nằm trong `ho_so_launch_v0.md`.
 - Kết quả duyệt chéo nhóm nhận được từ hội đồng:
-  - Câu hỏi nhận được: "Nếu tuần đầu phải xem lại 100%, chi phí mỗi việc thành công là bao nhiêu, và luật dừng chi phí 8.000 đ trong `pilot_plan.yaml` có tự kích hoạt ngay không?" Nhóm trả lời trong [tra_loi_hoi_dong.md](tra_loi_hoi_dong.md).
-  - Nhóm hội đồng, điểm ba tiêu chí, quyết định: [CHỜ NHÓM ĐIỀN theo phiếu của nhóm hội đồng].
+  - Câu hỏi nhận được: "Nếu tuần đầu phải xem lại 100%, chi phí mỗi việc thành công là bao nhiêu, và luật dừng chi phí 8.000 đ trong `pilot_plan.yaml` có tự kích hoạt ngay không?" Nhóm trả lời: xem lại 100% cho 11.743 đ/việc = 0,98× (12.415 đ = 1,03× nếu làm lại 15,3 phút) [simulated]; mốc 8.000 đ của hướng dẫn mẫu sẽ bị vượt ngay nên nhóm không dùng; luật 9.600 đ/yêu cầu cần 2 tuần liên tiếp và nay chỉ áp từ bước 0.50.
+  - Nhóm hội đồng: **04552** (L3A), theo phiếu chấm của nhóm 04552. Lần 1 (commit `1d25587`, hồ sơ và pilot còn mẫu): 0 + 10 + 0 = 10/30, No-go. Lần 2 (commit `b7586bd`): **10 + 10 + 5 = 25/30, Go có điều kiện** cho noi_dia + hang_nang. Hội đồng ghi đây là điểm đề xuất, chờ thành viên hội đồng xác nhận.
+  - Tiêu chí "Pilot ra được quyết định" được 5/10: thiết kế và cỡ mẫu đủ (hội đồng tính lại: 14 ngày ở bước 0.50 cho m ≈ 430, DE 9,57, khoảng 898 hiệu dụng mỗi nhánh > 859), nhưng luật chi phí chưa nhất quán: `pilot_plan.yaml` cộng 12.000 đ cho mọi ca không thành công, còn `chi_so.md` chỉ cộng theo `handoff_to_staff`; ngưỡng 9.600 đ/yêu cầu lại được giải thích bằng 2.370 đ/việc thành công (khác mẫu số).
+  - Câu hỏi sau chấm lại: các ca `lam_lai` được ghi nhận và cộng chi phí thế nào để luật 9.600 đ/yêu cầu không bỏ sót hoặc cộng trùng, và ngưỡng đã quy đổi chi phí cố định về cùng mẫu số chưa? Xem mục 7.
 
 ## 5. Khó khăn và cách xử lý
 
@@ -48,7 +50,8 @@ Chi tiết đóng góp của từng thành viên nằm trong `TEAM.md`.
 ## 7. Hạn chế và hướng cải thiện
 
 - Phút xem lại, làm lại là giả lập. Phải thay bằng phút đo thật qua `staff_review_decision`, `staff_rework_completed` sau tuần 1 của pilot.
-- Chi phí cả hệ thống cộng 12.000 đ cho mọi ca không thành công, kể cả 74 ca `lam_lai` đã có phút làm lại, nên có thể tính trùng một phần. Cần tách hai khoản khi có dữ liệu thật.
+- Chi phí cả hệ thống cộng 12.000 đ cho mọi ca không thành công, kể cả 74 ca `lam_lai` đã có phút làm lại, nên có thể tính trùng một phần. Hội đồng 04552 chỉ ra cùng điểm này: nếu 48 ca `lam_lai` trong phạm vi không phát `handoff_to_staff`, hai cách tính lệch 48 × 12.000 ÷ 982 ≈ 587 đ/yêu cầu [simulated]. Cần một định nghĩa chung cho `pilot_plan.yaml` và `chi_so.md` trước ngày bắt đầu: ca `lam_lai` chỉ tính phút làm lại đo thật (`staff_rework_completed`), ca chuyển nhân viên tính 12.000 đ (`handoff_to_staff`).
+- Ngưỡng 9.600 đ là **mỗi yêu cầu**, còn chi phí cố định 2.370 đ là **mỗi việc thành công**; không cộng thẳng hai số. Quy đổi về mỗi yêu cầu trong phạm vi: khối lượng một nửa 22.500 yêu cầu/tháng × 982/1.200 = 18.413 yêu cầu noi_dia + hang_nang; 40.000.000 ÷ 18.413 ≈ 2.172 đ/yêu cầu, nên 9.600 + 2.172 = 11.772 đ = 0,98× của 12.000 đ [simulated]. Ngưỡng vẫn dưới mức hoà vốn nhưng chỉ còn khoảng 2% dư địa; lý do trong `pilot_plan.yaml` cần ghi lại theo cùng mẫu số.
 - Mức chênh 6 điểm là đánh đổi. Nếu tác động thật chỉ 5 điểm, pilot có 36% khả năng không phát hiện được.
 - hang_nang có tỉ lệ mở lại 8,23% (13/158), gấp 2,6 lần noi_dia, nên phải theo dõi riêng với đối chứng cùng loại.
 
