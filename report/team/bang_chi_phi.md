@@ -1,6 +1,6 @@
 # Bảng chi phí · Nhiệm vụ A và B
 
-Số tính bằng `src/lab13.py`. Mọi con số tính từ cột `_simulated` ghi nhãn `simulated`. Mỗi câu trả lời không quá ba dòng, có ít nhất một con số.
+Phần A tính bằng `src/lab13.py` của P1 và được P2 kiểm độc lập; phần B tính bằng `tools/p2_verify.py`, các kịch bản B1–B3 đã đối chiếu với `mo_hinh()` của P1. Mọi con số tính từ cột `_simulated` ghi nhãn `simulated`. Mỗi câu trả lời không quá ba dòng, có ít nhất một con số.
 
 ## A1 · Ba phép thử đáp án biết trước
 
@@ -54,36 +54,42 @@ Chi phí biến đổi trong phạm vi = 3.072.513 đ ÷ 900 việc thành công
 
 - Chi phí cố định có đổi kết luận không? Ở khối lượng nào? Không đổi ở cả hai mức: 0,38× (45.000 yc/tháng) và 0,48× (22.500 yc/tháng) [simulated], vẫn dưới 12.000 đ. Cố định tỉ lệ nghịch với khối lượng: tổng chỉ chạm 12.000 đ khi còn 40.000.000 ÷ (12.000 − 3.414) = 4.659 việc thành công/tháng ≈ 6.212 yc/tháng [simulated].
 
-## B1 · Đổi từng yếu tố
+## B1 · Độ nhạy: chín kịch bản
 
-| Kịch bản | Cách tính | Chi phí mỗi việc thành công | Thay đổi (%) |
-| --- | --- | ---: | ---: |
-| Giá token gấp đôi | 52 đ và 260 đ cho 1.000 token; giá tool giữ nguyên | ... | ... |
-| Giá token giảm một nửa | 13 đ và 65 đ | ... | ... |
-| Tỉ lệ xem lại gấp đôi | Tiền xem lại × 2 | ... | ... |
-| Tỉ lệ xem lại giảm một nửa | Tiền xem lại ÷ 2 | ... | ... |
-| Số ca làm lại gấp đôi | Tiền làm lại × 2 | ... | ... |
-| Số ca làm lại giảm một nửa | Tiền làm lại ÷ 2 | ... | ... |
-| Lương nhân viên tăng 25% | 2.500 đ mỗi phút | ... | ... |
-| Chỉ cho chạy tối đa 2 lần | Bỏ lần chạy có attempt > 2; yêu cầu có so_lan_chay > 2 coi là chuyen_nhan_vien | ... | ... |
-| Chỉ cho chạy 1 lần | Như trên với giới hạn 1 | ... | ... |
+| Kịch bản | CPS (simulated) | Thay đổi so với gốc |
+|---|---:|---:|
+| Giá token gấp đôi | 4.723 đ | +5.6% |
+| Giá token giảm một nửa | 4.346 đ | -2.8% |
+| Tỉ lệ xem lại gấp đôi | 6.292 đ | +40.7% |
+| Tỉ lệ xem lại giảm một nửa | 3.562 đ | -20.3% |
+| Số ca làm lại gấp đôi | 6.787 đ | +51.8% |
+| Số ca làm lại giảm một nửa | 3.315 đ | -25.9% |
+| Lương nhân viên tăng 25% | 5.506 đ | +23.1% |
+| Tối đa 2 lần chạy | 4.237 đ | -5.2% |
+| Chỉ 1 lần chạy | 4.111 đ | -8.1% |
 
-## B2 · Đổi một cặp và xếp hạng
+## B2 · Đổi đồng thời hai tham số
 
-- Giá token gấp đôi cùng lúc tỉ lệ xem lại gấp đôi: ...
-- Xếp hạng ba yếu tố ảnh hưởng mạnh nhất: 1. ... · 2. ... · 3. ...
+- Token gấp đôi **và** xem lại gấp đôi: **6.543 đ/việc** (+46.3%, simulated).
+- Ba yếu tố nhạy nhất: **1. Làm lại → 2. Xem lại → 3. Chi phí nhân viên**.
 
-## B3 · Giới hạn chạy lại có thật sự rẻ hơn
+## B3 · Giới hạn số lần chạy
 
-| Giới hạn | Tổng chi phí trợ lý | Số yêu cầu không thành công | Chi phí cả hệ thống | Chi phí mỗi việc thành công |
-| --- | ---: | ---: | ---: | ---: |
-| 1 lần | ... | ... | ... | ... |
-| 2 lần | ... | ... | ... | ... |
-| 3 lần | ... | ... | ... | ... |
+| Giới hạn | Tổng Agent (simulated) | Không thành công | Cả hệ thống (simulated) | CPS Agent (simulated) |
+|---|---:|---:|---:|---:|
+| 1 lần | 3.621.781 đ | 319 | 7.449.781 đ | 4.111 đ |
+| 2 lần | 4.093.220 đ | 234 | 6.901.220 đ | 4.237 đ |
+| 3 lần | 4.373.585 đ | 222 | 7.037.585 đ | 4.472 đ |
 
-- Giới hạn nào rẻ nhất cho công ty? Có trùng với giới hạn cho chi phí mỗi việc thành công thấp nhất không? ...
+- **2 lần** có tổng chi phí hệ thống thấp nhất (6.901.220 đ), khác với giới hạn có CPS thấp nhất (simulated).
 
-## B4 · Nếu phải xem lại tất cả
+## B4 · Xem lại 100% trong phạm vi
 
-- Chi phí mỗi việc thành công khi xem lại 100% (`noi_dia` + `hang_nang`), so với 12.000 đ: ...
-- Kết quả này nói gì về thứ pilot cần học được? ...
+- 948 yêu cầu cần xem lại, 5 phút/yêu cầu; 48 ca làm lại, 9 phút/ca → CPS **11.743 đ**, bằng 0.98× baseline (simulated).
+- Nếu làm lại mất 15,3 phút/ca → CPS **12.415 đ**, bằng 1.03× baseline (simulated).
+- Để hòa vốn, thời gian xem lại phải không quá **5.1 phút** (làm lại 9 phút) hoặc **4.8 phút** (làm lại 15,3 phút).
+
+---
+### Trạng thái xác minh
+- **ĐÃ ĐỐI CHIẾU P1/P2** tại commit `25bb25e`: 20/20 kịch bản A2/A3/A4/B1/B2/B3, 222/222 giá trị khớp, sai lệch bằng 0. B4 và D1 chưa có phần tương ứng trong P1 để so.
+- Chi tiết sai lệch với tham chiếu: `report/team/p2_doi_chieu_so.md`.

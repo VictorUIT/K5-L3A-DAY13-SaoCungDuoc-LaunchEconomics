@@ -1,0 +1,672 @@
+{
+  "timestamp_utc": "2026-11-21T08:11:29.153714+00:00",
+  "inputs": {
+    "requests": 1200,
+    "runs": 1624
+  },
+  "results": {
+    "a1": {
+      "expected_2": 1.2,
+      "expected_unbounded": 1.25,
+      "cost_factor_3": 1.25
+    },
+    "a2": {
+      "token": 245585.13199999998,
+      "tool": 84000.0,
+      "retry_cost": 93804.488,
+      "review": 1780000.0,
+      "rework": 2264000.0,
+      "total": 4373585.132,
+      "success": 978,
+      "unsuccessful": 222,
+      "requests": 1200,
+      "runs": 1624,
+      "cps": 4471.968437627812,
+      "invoice_per_req": 274.65427666666665,
+      "review_minutes": 890.0,
+      "rework_minutes": 1132.0,
+      "token_in": 5771712,
+      "token_out": 734774,
+      "tool_calls": 5600
+    },
+    "a3": {
+      "noi_dia": {
+        "token": 130987.29800000001,
+        "tool": 47700.0,
+        "retry_cost": 19119.456,
+        "review": 942000.0,
+        "rework": 990000.0,
+        "total": 2110687.298,
+        "success": 783,
+        "unsuccessful": 41,
+        "requests": 824,
+        "runs": 916,
+        "cps": 2695.641504469987,
+        "invoice_per_req": 216.85351699029127,
+        "review_minutes": 471.0,
+        "rework_minutes": 495.0,
+        "token_in": 2961633,
+        "token_out": 415268,
+        "tool_calls": 3180
+      },
+      "hang_nang": {
+        "token": 34035.976,
+        "tool": 11790.0,
+        "retry_cost": 15618.43,
+        "review": 346000.0,
+        "rework": 570000.0,
+        "total": 961825.976,
+        "success": 117,
+        "unsuccessful": 41,
+        "requests": 158,
+        "runs": 232,
+        "cps": 8220.734837606838,
+        "invoice_per_req": 290.03782278481015,
+        "review_minutes": 173.0,
+        "rework_minutes": 285.0,
+        "token_in": 787921,
+        "token_out": 104231,
+        "tool_calls": 786
+      },
+      "quoc_te": {
+        "token": 61346.765999999996,
+        "tool": 17775.0,
+        "retry_cost": 46218.40800000001,
+        "review": 290000.0,
+        "rework": 554000.0,
+        "total": 923121.7660000001,
+        "success": 41,
+        "unsuccessful": 109,
+        "requests": 150,
+        "runs": 348,
+        "cps": 22515.165024390244,
+        "invoice_per_req": 527.47844,
+        "review_minutes": 145.0,
+        "rework_minutes": 277.0,
+        "token_in": 1570176,
+        "token_out": 157863,
+        "tool_calls": 1185
+      },
+      "doi_tac": {
+        "token": 19215.092,
+        "tool": 6735.0,
+        "retry_cost": 12848.194,
+        "review": 202000.0,
+        "rework": 150000.0,
+        "total": 377950.092,
+        "success": 37,
+        "unsuccessful": 31,
+        "requests": 68,
+        "runs": 128,
+        "cps": 10214.867351351351,
+        "invoice_per_req": 381.619,
+        "review_minutes": 101.0,
+        "rework_minutes": 75.0,
+        "token_in": 451982,
+        "token_out": 57412,
+        "tool_calls": 449
+      }
+    },
+    "a4": {
+      "scoped_success": 900,
+      "scoped_requests": 982,
+      "scoped_cps": 3413.903637777778,
+      "monthly_success": 33750.0,
+      "full_fixed_per_success": 1185.1851851851852,
+      "full_cps_with_fixed": 4599.088822962964,
+      "half_fixed_per_success": 2370.3703703703704,
+      "half_cps_with_fixed": 5784.274008148148
+    },
+    "b1": [
+      {
+        "label": "Giá token gấp đôi",
+        "key": "token_double",
+        "cps": 4723.077979550103,
+        "delta_pct": 5.615190389301894,
+        "scenario": {
+          "gia_vao": 52,
+          "gia_ra": 260
+        }
+      },
+      {
+        "label": "Giá token giảm một nửa",
+        "key": "token_half",
+        "cps": 4346.413666666666,
+        "delta_pct": -2.807595194650947,
+        "scenario": {
+          "gia_vao": 13,
+          "gia_ra": 65
+        }
+      },
+      {
+        "label": "Tỉ lệ xem lại gấp đôi",
+        "key": "review_double",
+        "cps": 6292.009337423313,
+        "delta_pct": 40.69887623717119,
+        "scenario": {
+          "he_so_xem_lai": 2
+        }
+      },
+      {
+        "label": "Tỉ lệ xem lại giảm một nửa",
+        "key": "review_half",
+        "cps": 3561.9479877300614,
+        "delta_pct": -20.349438118585596,
+        "scenario": {
+          "he_so_xem_lai": 0.5
+        }
+      },
+      {
+        "label": "Số ca làm lại gấp đôi",
+        "key": "rework_double",
+        "cps": 6786.896862985685,
+        "delta_pct": 51.76531224772785,
+        "scenario": {
+          "he_so_lam_lai": 2
+        }
+      },
+      {
+        "label": "Số ca làm lại giảm một nửa",
+        "key": "rework_half",
+        "cps": 3314.5042249488756,
+        "delta_pct": -25.88265612386391,
+        "scenario": {
+          "he_so_lam_lai": 0.5
+        }
+      },
+      {
+        "label": "Lương nhân viên tăng 25%",
+        "key": "salary_plus25",
+        "cps": 5505.710768916156,
+        "delta_pct": 23.11604712122477,
+        "scenario": {
+          "luong_phut": 2500
+        }
+      },
+      {
+        "label": "Tối đa 2 lần chạy",
+        "key": "cap2",
+        "cps": 4237.288022774327,
+        "delta_pct": -5.247810178597156,
+        "scenario": {
+          "max_lan_chay": 2
+        }
+      },
+      {
+        "label": "Chỉ 1 lần chạy",
+        "key": "cap1",
+        "cps": 4110.988245175937,
+        "delta_pct": -8.072064852124939,
+        "scenario": {
+          "max_lan_chay": 1
+        }
+      }
+    ],
+    "b2": {
+      "both": 6543.118879345604,
+      "delta_pct": 46.314066626473085
+    },
+    "b3": [
+      {
+        "cap": 1,
+        "agent_total": 3621780.6440000003,
+        "unsuccessful": 319,
+        "system_total": 7449780.644,
+        "cps": 4110.988245175937
+      },
+      {
+        "cap": 2,
+        "agent_total": 4093220.23,
+        "unsuccessful": 234,
+        "system_total": 6901220.23,
+        "cps": 4237.288022774327
+      },
+      {
+        "cap": 3,
+        "agent_total": 4373585.132,
+        "unsuccessful": 222,
+        "system_total": 7037585.132,
+        "cps": 4471.968437627812
+      }
+    ],
+    "b4": {
+      "scoped_requests": 982,
+      "success": 900,
+      "ok_requests": 948,
+      "rework_count": 48,
+      "token_tool": 224513.274,
+      "review_cost": 9480000.0,
+      "rework_9": 864000.0,
+      "rework_15_3": 1468800.0000000002,
+      "total9": 10568513.274,
+      "total15_3": 11173313.274,
+      "cps_9m": 11742.792526666666,
+      "cps_15_3m": 12414.792526666666,
+      "break_even_review_minutes_9m": 5.122092155063291,
+      "break_even_review_minutes_15_3m": 4.803104813291139,
+      "observed_mean_rework_minutes_simulated": 15.297297297297296
+    },
+    "d1": {
+      "n_5pt": 1251,
+      "n_6pt": 859,
+      "de_75": 2.48,
+      "raw_req_per_arm": 3103,
+      "staff_per_arm": 42,
+      "staff_total": 84,
+      "max_staff_eff": 1000.0,
+      "max_depot_eff": 300.0,
+      "m_for_6pt": 299,
+      "de_at_m": 6.96
+    },
+    "e1": {
+      "primary_pct": 82.83333333333334,
+      "ignore_pct": 27.11864406779661,
+      "reopen_pct": 4.25,
+      "reviewed": 177,
+      "ignored_count": 48
+    },
+    "qt_attempts": {
+      "1": 30.0,
+      "2": 11.428571428571429,
+      "3": 2.1505376344086025
+    }
+  },
+  "reference_checks": [
+    {
+      "metric": "A2.token",
+      "calculated": 245585.13199999998,
+      "reference": 245585.0,
+      "relative_error_pct": 5.3749211060625116e-05,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.tool",
+      "calculated": 84000.0,
+      "reference": 84000.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.retry_cost",
+      "calculated": 93804.488,
+      "reference": 93804.0,
+      "relative_error_pct": 0.0005202336787317761,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.review",
+      "calculated": 1780000.0,
+      "reference": 1780000.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.rework",
+      "calculated": 2264000.0,
+      "reference": 2264000.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.total",
+      "calculated": 4373585.132,
+      "reference": 4373585.0,
+      "relative_error_pct": 3.0181190080006864e-06,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.success",
+      "calculated": 978,
+      "reference": 978.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.cps",
+      "calculated": 4471.968437627812,
+      "reference": 4472.0,
+      "relative_error_pct": 0.0007057775534009638,
+      "status": "PASS"
+    },
+    {
+      "metric": "A2.invoice_per_req",
+      "calculated": 274.65427666666665,
+      "reference": 274.7,
+      "relative_error_pct": 0.016644824657204953,
+      "status": "PASS"
+    },
+    {
+      "metric": "A4.full_cps_with_fixed",
+      "calculated": 4599.088822962964,
+      "reference": 4599.0,
+      "relative_error_pct": 0.0019313538369994429,
+      "status": "PASS"
+    },
+    {
+      "metric": "A4.half_cps_with_fixed",
+      "calculated": 5784.274008148148,
+      "reference": 5784.0,
+      "relative_error_pct": 0.00473734695968039,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.token_double",
+      "calculated": 4723.077979550103,
+      "reference": 4723.0,
+      "relative_error_pct": 0.001651059709993847,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.token_half",
+      "calculated": 4346.413666666666,
+      "reference": 4346.0,
+      "relative_error_pct": 0.00951833103235984,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.review_double",
+      "calculated": 6292.009337423313,
+      "reference": 6292.0,
+      "relative_error_pct": 0.00014840151482676053,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.review_half",
+      "calculated": 3561.9479877300614,
+      "reference": 3562.0,
+      "relative_error_pct": 0.0014601984822736256,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.rework_double",
+      "calculated": 6786.896862985685,
+      "reference": 6787.0,
+      "relative_error_pct": 0.0015196259660320874,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.rework_half",
+      "calculated": 3314.5042249488756,
+      "reference": 3315.0,
+      "relative_error_pct": 0.014955506821248356,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.salary_plus25",
+      "calculated": 5505.710768916156,
+      "reference": 5506.0,
+      "relative_error_pct": 0.005253016415623732,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.cap2",
+      "calculated": 4237.288022774327,
+      "reference": 4237.0,
+      "relative_error_pct": 0.006797799724501916,
+      "status": "PASS"
+    },
+    {
+      "metric": "B1.cap1",
+      "calculated": 4110.988245175937,
+      "reference": 4111.0,
+      "relative_error_pct": 0.00028593588088654596,
+      "status": "PASS"
+    },
+    {
+      "metric": "B2.both",
+      "calculated": 6543.118879345604,
+      "reference": 6543.0,
+      "relative_error_pct": 0.0018168935595904061,
+      "status": "PASS"
+    },
+    {
+      "metric": "B3.system_cap1",
+      "calculated": 7449780.644,
+      "reference": 7449781.0,
+      "relative_error_pct": 4.778663959110007e-06,
+      "status": "PASS"
+    },
+    {
+      "metric": "B3.system_cap2",
+      "calculated": 6901220.23,
+      "reference": 6901220.0,
+      "relative_error_pct": 3.332744072019655e-06,
+      "status": "PASS"
+    },
+    {
+      "metric": "B3.system_cap3",
+      "calculated": 7037585.132,
+      "reference": 7037585.0,
+      "relative_error_pct": 1.875643423362799e-06,
+      "status": "PASS"
+    },
+    {
+      "metric": "B4.cps_9m",
+      "calculated": 11742.792526666666,
+      "reference": 11743.0,
+      "relative_error_pct": 0.0017667830480612894,
+      "status": "PASS"
+    },
+    {
+      "metric": "B4.cps_15_3m",
+      "calculated": 12414.792526666666,
+      "reference": 12414.0,
+      "relative_error_pct": 0.006384136190318694,
+      "status": "PASS"
+    },
+    {
+      "metric": "D1.n_5pt",
+      "calculated": 1251,
+      "reference": 1251.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "D1.n_6pt",
+      "calculated": 859,
+      "reference": 859.0,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    },
+    {
+      "metric": "E1.primary_pct",
+      "calculated": 82.83333333333334,
+      "reference": 82.83,
+      "relative_error_pct": 0.004024306813164931,
+      "status": "PASS"
+    },
+    {
+      "metric": "E1.ignore_pct",
+      "calculated": 27.11864406779661,
+      "reference": 27.12,
+      "relative_error_pct": 0.004999750012507484,
+      "status": "PASS"
+    },
+    {
+      "metric": "E1.reopen_pct",
+      "calculated": 4.25,
+      "reference": 4.25,
+      "relative_error_pct": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "p1_comparison": {
+    "status": "MATCHED",
+    "details": {
+      "token": {
+        "p1": 245585.13199999998,
+        "p2": 245585.13199999998,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "tool": {
+        "p1": 84000.0,
+        "p2": 84000.0,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "xem_lai": {
+        "p1": 1780000.0,
+        "p2": 1780000.0,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "lam_lai": {
+        "p1": 2264000.0,
+        "p2": 2264000.0,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "tong": {
+        "p1": 4373585.132,
+        "p2": 4373585.132,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "thanh_cong": {
+        "p1": 978.0,
+        "p2": 978.0,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      },
+      "cps": {
+        "p1": 4471.968437627812,
+        "p2": 4471.968437627812,
+        "diff": 0.0,
+        "relative_error_pct": 0.0,
+        "status": "PASS"
+      }
+    }
+  },
+  "note": "Time-derived quantities are simulated",
+  "p1_commit": "25bb25ee49d36f27edd1ad7332d1b87720341b95",
+  "extended_p1_comparison": [
+    {
+      "case": "A2",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A3.noi_dia",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A3.hang_nang",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A3.quoc_te",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A3.doi_tac",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.token_double",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.token_half",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.review_double",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.review_half",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.rework_double",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.rework_half",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.salary_plus25",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.cap2",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B1.cap1",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B2",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B3.cap1",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B3.cap2",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "B3.cap3",
+      "keys": 12,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A4.full",
+      "keys": 3,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "case": "A4.half",
+      "keys": 3,
+      "max_absolute_difference": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "p1_scope_note": "P1 CLI prints A1-A4; B scenarios checked via mo_hinh; B4 and D1 not implemented in P1 CLI."
+}
