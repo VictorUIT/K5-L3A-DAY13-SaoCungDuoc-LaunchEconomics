@@ -34,4 +34,5 @@
 
 ## 6. Tự đánh giá
 
-[điền]
+- Làm được: soát CP1, CP2 theo "Xong khi" và phát hiện hai chỗ thiếu trước khi nộp (`TODO CP2` chưa viết trong `src/lab13.py`, B4 thiếu câu "pilot cần học được gì"); CP3 đạt đồng thuận 18/20 = 90%, bảng khắc phục đủ năm loại, mỗi dòng có ngưỡng đo được và một vai trò phụ trách.
+- Rút ra: gắn nhãn theo nguyên nhân gốc, không theo chỗ cần sửa.
