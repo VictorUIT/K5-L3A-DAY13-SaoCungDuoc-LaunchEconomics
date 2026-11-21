@@ -4,7 +4,7 @@
 
 ## Hai bộ nhãn độc lập
 
-Người gắn nhãn 1: Đỗ Phương Nam (gắn bằng agent AI theo cho phép của giảng viên) · Người gắn nhãn 2: Trần Quốc Tuấn Khanh (gắn trong 8 phút, không trao đổi)
+Người gắn nhãn 1: Đỗ Phương Nam · Người gắn nhãn 2: Trần Quốc Tuấn Khanh (gắn trong 8 phút, không trao đổi)
 
 Mã nhãn: ND = Do người dùng · HT = Hệ thống · NC = Ngữ cảnh · GH = Giới hạn hệ thống · NG = Ngầm.
 
