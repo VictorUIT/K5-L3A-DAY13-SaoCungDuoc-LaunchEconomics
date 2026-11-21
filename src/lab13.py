@@ -432,9 +432,16 @@ def m_toi_thieu(n_can, so_cum, icc=ICC):
 
 
 def power_hai_ti_le(p1, p2, n, alpha=ALPHA):
-    """Power của phép so hai tỉ lệ với n mỗi nhóm (statsmodels, như hướng dẫn D1)."""
-    from statsmodels.stats.power import NormalIndPower
-    from statsmodels.stats.proportion import proportion_effectsize
+    """Power của phép so hai tỉ lệ với n mỗi nhóm (statsmodels, như hướng dẫn D1).
+    Máy chưa cài statsmodels: tính cùng công thức (Cohen's h, kiểm định hai phía) bằng NormalDist."""
+    try:
+        from statsmodels.stats.power import NormalIndPower
+        from statsmodels.stats.proportion import proportion_effectsize
+    except ImportError:
+        from statistics import NormalDist
+        h = abs(2 * math.asin(math.sqrt(p2)) - 2 * math.asin(math.sqrt(p1)))
+        z, d = NormalDist().inv_cdf(1 - alpha / 2), h * math.sqrt(n / 2)
+        return NormalDist().cdf(d - z) + NormalDist().cdf(-d - z)
     return float(NormalIndPower().power(proportion_effectsize(p2, p1), nobs1=n, alpha=alpha, ratio=1.0))
 
 

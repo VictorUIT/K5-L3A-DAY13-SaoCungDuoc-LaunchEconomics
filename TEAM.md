@@ -14,7 +14,7 @@
 |   1 | Nguyễn Văn Ngọc Sơn | 2A202603600 | kidoamdice@gmail.com | kynnnS | Người viết code (P1) |
 |   2 | Nguyễn Bình An | 2A202603606 | 26ai.annb@vinuni.edu.vn | An041003 | Người kiểm số (P2) |
 |   3 | Đỗ Phương Nam | 2A202603621 | donam02zx@gmail.com | donam02zx | Người gắn nhãn 1 |
-|   4 | Trần Quốc Tuấn Khanh | [CẦN ĐIỀN] | [CẦN ĐIỀN] | VictorUIT | Người gắn nhãn 2, kiêm giữ hồ sơ |
+|   4 | Trần Quốc Tuấn Khanh | 2A202603625 | 26ai.khanhtqt@vinuni.edu.vn | VictorUIT | Người gắn nhãn 2, kiêm giữ hồ sơ (P4) |
 
 Bốn vai của lab:
 
@@ -88,19 +88,20 @@ Sao chép mục dưới đây cho từng thành viên.
 - [Báo cáo cá nhân](report/team/2A202603600_NguyenVanNgocSon.md).
 - Commit `25bb25e`, `a5e97e5`, `972733f` (CP1) và commit thêm CP2 + D1 vào `src/lab13.py`; output `python lab13.py` khớp số tham chiếu trong ngưỡng 2% và khớp `tools/p2_verify.py` của P2.
 
-## Trần Quốc Tuấn Khanh-[CẦN ĐIỀN MSSV] (GitHub VictorUIT)
-
-Ghi theo lịch sử commit và `report/team/bang_loi.md`; thành viên tự xác nhận và bổ sung.
+## TranQuocTuanKhanh-2A202603625
 
 ### Phần việc phụ trách
 
-- Người gắn nhãn 2, kiêm giữ hồ sơ: gắn nhãn độc lập 20 ca ở CP3; điền `pilot_plan.yaml`, `chi_so.md`, `ho_so_launch_v0.md`, `phieu_cham.md`.
+- Người gắn nhãn 2 kiêm giữ hồ sơ (P4 – Pilot & Launch): CP4 `pilot_plan.yaml`; CP5 `ho_so_launch_v0.md`, `chi_so.md`, `phieu_cham.md`; bộ nhãn người 2 ở CP3.
 
 ### Đóng góp cụ thể
 
-- Cột "Nhãn người 2" trong `bang_loi.md`.
-- CP4, CP5: commit `05deb26` (pilot plan, hồ sơ launch v0, đặc tả chỉ số, phiếu chấm); commit `f913894` (in tiếng Việt trên console Windows); merge nhánh `p1/cost-model` (`a8abdd7`).
+- Pilot chia theo nhân viên 20 + 20, ngẫu nhiên phân tầng theo depot; D1 đủ năm câu (1.251 · 3.103 · 1.000 · 300 · m ≥ 299); mức chênh 6 điểm (n = 859, DE 6,96), ghi rõ power 0,64 nếu tác động thật 5 điểm; 4 luật dừng đủ bốn vế; quyết định 2027-01-12.
+- Hồ sơ launch bảy mục, đề xuất Go có điều kiện (5 điều kiện có người phụ trách, ngày kiểm tra); nêu con số bất lợi hang_nang mở lại 8,23% và xem lại 100% là 0,98–1,03× [simulated].
+- `chi_so.md`: ba chỉ số 82,83% · 27,12% · 4,25%; hai chỉ số tự đề xuất; 11 event có `trace_id`; 5 rủi ro kinh tế.
+- Chấm hội đồng nhóm 04552: 30/30, Go có điều kiện.
+- Ghép nhánh P1 vào `main`; sửa lỗi in tiếng Việt trên Windows; `p2_verify.py` chỉ ghi đè báo cáo khi có `--write`.
 
 ### Bằng chứng
 
-- [CẦN ĐIỀN: báo cáo cá nhân `report/team/MSSV_HoTen.md`]
+- [Báo cáo cá nhân](report/team/2A202603625_TranQuocTuanKhanh.md); commit `05deb26`, `a8abdd7`, `f913894`; cột "Nhãn người 2" trong [bảng lỗi](report/team/bang_loi.md).
