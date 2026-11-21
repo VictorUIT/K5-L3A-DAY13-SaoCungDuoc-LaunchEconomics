@@ -29,7 +29,6 @@
 ## 5. Công cụ AI đã dùng
 
 - Claude Code: tóm tắt đề; trích 20 ca lỗi từ file docx ra phiếu gắn nhãn không kèm đáp án; lập checklist "Xong khi"; chạy `src/lab13.py` và đối chiếu số A, B với số trong hướng dẫn chi tiết.
-- Gắn nhãn 20 ca lỗi (bộ nhãn người 1): dùng một agent Claude mới, chỉ nhận định nghĩa năm loại và 20 ca, không đọc file nào trong repo, theo cho phép của giảng viên. Bộ nhãn được giữ riêng, không chia sẻ cho người gắn nhãn 2 trước khi so.
 - Tự kiểm tra: đối chiếu từng số trong `bang_chi_phi.md` với output `python lab13.py` và bảng số đối chiếu trong `docs/Lab13_Huong_dan_chi_tiet_buoi_chieu.md`.
 
 ## 6. Tự đánh giá
