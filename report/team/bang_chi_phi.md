@@ -10,7 +10,7 @@ Phần A tính bằng `src/lab13.py` của P1 và được P2 kiểm độc lậ
 | Số lần chạy trung bình, chạy đến khi đúng | 1,25 (= 1 ÷ 0,8) · ĐẠT |
 | Hệ số chi phí mỗi việc thành công, tối đa 3 lần | 1,25 (= 1,24 ÷ 0,992 = 1/p, k triệt tiêu) · ĐẠT |
 
-`python lab13.py` in `Ba phép thử đáp án biết trước: ĐẠT` và `Phép thử biên A1: ĐẠT` (p = 0, p = 1, k = 1, k lớn, tham số sai).
+`python lab13.py` in `Ba phép thử đáp án biết trước: ĐẠT` và `Phép thử biên A1: ĐẠT` (p = 0, p = 1, k = 1, k lớn; tham số sai: p ngoài [0, 1], nan, inf, k ≤ 0, k không nguyên, bool).
 
 ## A2 · Mô hình chi phí từ trace
 
@@ -26,8 +26,8 @@ Phần A tính bằng `src/lab13.py` của P1 và được P2 kiểm độc lậ
 | Chi phí mỗi việc thành công | 4.472 | 4.373.585 ÷ 978 | simulated |
 | Hoá đơn token và tool chia cho số yêu cầu | 274,7 | (245.585 + 84.000) ÷ 1.200 | đo từ trace |
 
-- Chi phí mỗi việc thành công gấp bao nhiêu lần "hoá đơn chia số yêu cầu"? 4.472 ÷ 274,7 = **16,3 lần** [simulated]: hoá đơn token bỏ qua giờ nhân viên và các lần chạy không ra việc thành công.
-- Khoản nào chiếm tỉ trọng lớn nhất trong tổng chi phí, bao nhiêu phần trăm? **Làm lại, 51,8%** [simulated], tiếp theo là xem lại 40,7% [simulated]; giờ nhân viên chiếm 92,5%, token + tool chỉ 7,5%.
+- Chi phí mỗi việc thành công gấp bao nhiêu lần "hoá đơn chia số yêu cầu"? 4.472 ÷ 274,7 = **16,3 lần** [simulated], vì hoá đơn token + tool không gồm chi phí nhân viên (simulated) và chia cho cả 1.200 yêu cầu, còn chi phí mỗi việc thành công chia tổng chi phí cho 978 việc thành công; token + tool vẫn tính cả các lần chạy lỗi.
+- Khoản nào chiếm tỉ trọng lớn nhất trong tổng chi phí, bao nhiêu phần trăm? **Làm lại, 51,8%** [simulated], tiếp theo là xem lại 40,7% [simulated]; giờ nhân viên chiếm 92,5%, token + tool chỉ 7,5% tổng chi phí [simulated].
 - So với 12.000 đ: 4.472 đ chưa gồm 222 ca không thành công (148 `chuyen_nhan_vien` + 74 `lam_lai`). Chi phí cả hệ thống = (4.373.585 + 222 × 12.000) ÷ 1.200 = **5.865 đ/yêu cầu = 0,49×** [simulated].
 
 ## A3 · Tách theo loại yêu cầu
@@ -39,9 +39,9 @@ Phần A tính bằng `src/lab13.py` của P1 và được P2 kiểm độc lậ
 | quoc_te | 150 | 27,3% (41) | 2,32 | 22.515 đ [simulated] | 1,88× [simulated] |
 | doi_tac | 68 | 54,4% (37) | 1,88 | 10.215 đ [simulated] | 0,85× [simulated] |
 
-- Loại nào không đáng để trợ lý xử lý? Với loại đó, cho chạy lại tới 3 lần có giúp không? **quoc_te**: 1,88× [simulated], chỉ 27,3% thành công, 91/150 ca chuyển nhân viên. Chạy lại không giúp: tỉ lệ ok giảm từ 30,0% (lần 1) xuống 11,4% (lần 2) và 2,2% (lần 3); 198 lần chạy lại chỉ thêm 14 lần ok nhưng chiếm 58% tiền token + tool của loại này.
+- Loại nào không đáng để trợ lý xử lý? Với loại đó, cho chạy lại tới 3 lần có giúp không? **quoc_te**: 1,88× [simulated], chỉ 27,3% thành công, 91/150 ca chuyển nhân viên. Chạy lại có lợi ích biên rất thấp và không hiệu quả kinh tế: tỉ lệ ok 30,0% → 11,4% → 2,2% (lần 1 → 2 → 3); 198 lần chạy lại chỉ thêm 14 lần ok, 9 việc thành công, nhưng chiếm 58% tiền token + tool của loại này.
 - doi_tac cũng loại khỏi pilot dù 0,85× [simulated]: chỉ 54,4% thành công, cộng 31 ca nhân viên làm thay thì cả hệ thống là 11.029 đ/yêu cầu = 0,92× [simulated], sát ngưỡng và có điều khoản riêng.
-- Phạm vi pilot đề xuất: **noi_dia + hang_nang** (0,22× và 0,69× [simulated]; cả hệ thống 0,26× và 0,77×). Lần chạy 2 của noi_dia vẫn ok 75,7%, nên chạy lại còn có ích ở loại này.
+- Phạm vi pilot đề xuất: **noi_dia + hang_nang** (0,22× và 0,69× [simulated]; cả hệ thống 0,26× và 0,77× [simulated]). Ở noi_dia, lần chạy 2 vẫn ok 75,7%: 92 lần chạy lại thêm 60 việc thành công, nên chạy lại còn có ích ở loại này.
 
 ## A4 · Chi phí cố định (phạm vi noi_dia + hang_nang)
 

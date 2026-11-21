@@ -71,13 +71,21 @@ def kiem_tra_bien_a1():
         for k in (1, 2, 3, 10, None):
             assert abs(he_so_chi_phi_moi_viec_thanh_cong(p, k) - 1 / p) < 1e-9
         assert abs(so_lan_chay_ky_vong(p, 1000) - so_lan_chay_ky_vong(p)) < 1e-9  # k lớn → 1/p
-    for p_sai, k_sai in ((-0.1, 2), (1.1, 2), (0.5, 0), (0.5, 2.5), (float('nan'), 2)):
+    for p_sai, k_sai in ((-0.1, 2), (1.1, 2), (0.5, 0), (0.5, -1), (0.5, 2.5), (float('nan'), 2),
+                         (float('inf'), 2), (True, 2), (0.5, True)):
         try:
             so_lan_chay_ky_vong(p_sai, k_sai)
         except ValueError:
             continue
         raise AssertionError(f'phải báo lỗi với p={p_sai}, k={k_sai}')
     print('Phép thử biên A1: ĐẠT')
+
+
+def in_bang_a1():
+    """In giá trị của ba phép thử để chép vào bảng A1 (phép thử nằm ở kiem_tra_dap_an_biet_truoc)."""
+    print(f'  A1 (p = 0,8): tối đa 2 lần → {vn(so_lan_chay_ky_vong(0.8, 2), 2)} lần chạy · '
+          f'đến khi đúng → {vn(so_lan_chay_ky_vong(0.8), 2)} lần chạy · '
+          f'hệ số chi phí, tối đa 3 lần → {vn(he_so_chi_phi_moi_viec_thanh_cong(0.8, 3), 2)}')
 
 
 # ---------- Nhiệm vụ A2 · Mô hình chi phí từ trace ----------
@@ -99,6 +107,12 @@ def kiem_tra_du_lieu(runs, reqs):
     assert (reqs.set_index('request_id')['so_lan_chay'] == so_run.reindex(reqs['request_id']).fillna(0)).all(), \
         'so_lan_chay không khớp số dòng trong logix_runs.csv'
     assert reqs['ket_qua'].isin(['thanh_cong', 'lam_lai', 'chuyen_nhan_vien']).all(), 'ket_qua lạ'
+    assert reqs['loai'].isin(LOAI).all(), 'loai lạ'
+    assert runs['status'].isin(['ok', 'loi']).all(), 'status lạ'
+    assert runs['attempt'].ge(1).all() and (runs.groupby('request_id')['attempt'].max() == so_run).all(), \
+        'attempt không chạy liên tục từ 1'
+    assert (runs[['tokens_in', 'tokens_out', 'tool_calls']] >= 0).all().all() and \
+        (reqs[['phut_xem_lai_simulated', 'phut_lam_lai_simulated']] >= 0).all().all(), 'có giá trị âm'
     print(f'Dữ liệu: {vn(len(reqs))} yêu cầu, {vn(len(runs))} lần chạy, khoá và số lần chạy khớp nhau')
 
 
@@ -160,7 +174,8 @@ def in_bang_a2(kq, baseline=BASELINE):
         print(f'  {nhan:32s} {vn(kq[khoa], so_le):>12s}  {ghi_chu}')
     print(f"  Chi phí mỗi việc thành công / hoá đơn mỗi yêu cầu = {vn(kq['cps'] / kq['hoa_don_moi_yc'], 1)} lần")
     print(f"  Tỉ trọng: làm lại {vn(kq['lam_lai'] / kq['tong'] * 100, 1)}%, xem lại {vn(kq['xem_lai'] / kq['tong'] * 100, 1)}%, "
-          f"token {vn(kq['token'] / kq['tong'] * 100, 1)}%, tool {vn(kq['tool'] / kq['tong'] * 100, 1)}%; "
+          f"token {vn(kq['token'] / kq['tong'] * 100, 1)}%, tool {vn(kq['tool'] / kq['tong'] * 100, 1)}% "
+          f"(token + tool {vn((kq['token'] + kq['tool']) / kq['tong'] * 100, 1)}%); "
           f"giờ nhân viên {vn(nv / kq['tong'] * 100, 1)}% (simulated)")
     print(f"  Cả hệ thống / yêu cầu = (tổng + {kq['khong_thanh_cong']} ca không thành công × {vn(baseline)}) / "
           f"{vn(kq['so_yeu_cau'])} = {vn(ca_he_thong)} đ = {vn(ca_he_thong / baseline, 2)}× baseline (simulated)")
@@ -175,13 +190,14 @@ def tach_theo_loai(runs, reqs, baseline=BASELINE):
     hang = []
     for loai in LOAI:
         kq = mo_hinh(runs, reqs[reqs['loai'] == loai])
+        n = kq['so_yeu_cau'] or math.nan  # loại vắng mặt trong tập con → nan, không chia cho 0
         hang.append(dict(loai=loai, so_yeu_cau=kq['so_yeu_cau'], thanh_cong=kq['thanh_cong'],
-                         ti_le_thanh_cong=kq['thanh_cong'] / kq['so_yeu_cau'],
-                         lan_chay_moi_yc=kq['so_run'] / kq['so_yeu_cau'],
+                         ti_le_thanh_cong=kq['thanh_cong'] / n,
+                         lan_chay_moi_yc=kq['so_run'] / n,
                          tong=kq['tong'], cps=kq['cps'], so_voi_baseline=kq['cps'] / baseline,
                          chay_lai=kq['chay_lai'], token_tool=kq['token'] + kq['tool'],
                          # cả hệ thống: cộng 12.000 đ cho mỗi yêu cầu không thành công vì nhân viên làm thay
-                         ca_he_thong_moi_yc=(kq['tong'] + kq['khong_thanh_cong'] * baseline) / kq['so_yeu_cau']))
+                         ca_he_thong_moi_yc=(kq['tong'] + kq['khong_thanh_cong'] * baseline) / n))
     return pd.DataFrame(hang).set_index('loai')
 
 
@@ -206,8 +222,10 @@ def in_bang_a3(runs, reqs):
               f" {vn(h['chay_lai'])}/{vn(h['token_tool'])} = {vn(h['chay_lai'] / h['token_tool'] * 100, 0)}%")
     print('  Kết quả theo loại (số yêu cầu)')
     kq_loai = pd.crosstab(reqs['loai'], reqs['ket_qua']).reindex(list(LOAI)).fillna(0)
+    kq_loai.loc['tổng'] = kq_loai.sum()
     for loai, h in kq_loai.iterrows():
-        print(f"  {loai:10s} " + '  '.join(f'{c}: {h.get(c, 0):.0f}' for c in ('thanh_cong', 'lam_lai', 'chuyen_nhan_vien')))
+        print(f"  {loai:10s} " + '  '.join(f'{c}: {h.get(c, 0):.0f}' for c in ('thanh_cong', 'lam_lai', 'chuyen_nhan_vien'))
+              + f"  → không thành công: {h.get('lam_lai', 0) + h.get('chuyen_nhan_vien', 0):.0f}")
     ti_le, so_run = ti_le_ok_theo_lan_thu(runs, reqs)
     print('  Tỉ lệ lần chạy ok theo lần thử (số lần ok / số lần chạy trong ngoặc)')
     for loai in LOAI:
@@ -215,6 +233,14 @@ def in_bang_a3(runs, reqs):
                       f'({ti_le.loc[loai, a] * so_run.loc[loai, a]:.0f}/{so_run.loc[loai, a]:.0f})'
                       for a in ti_le.columns)
         print(f'  {loai:10s} {o}')
+    # Lợi ích biên của chạy lại: run ok ở attempt > 1 là lần ok đầu tiên (agent dừng khi ok)
+    chay_lai = runs.merge(reqs[['request_id', 'loai', 'ket_qua']], on='request_id', validate='many_to_one')
+    chay_lai = chay_lai[chay_lai['attempt'] > 1]
+    print('  Chạy lại (attempt > 1): số lần chạy lại → số lần ok → số việc thành công thêm')
+    for loai in LOAI:
+        r = chay_lai[chay_lai['loai'] == loai]
+        ok = r[r['status'] == 'ok']
+        print(f"  {loai:10s} {len(r)} → {len(ok)} ok → {(ok['ket_qua'] == 'thanh_cong').sum()} thành công")
     return bang
 
 
@@ -229,7 +255,7 @@ def chi_phi_co_dinh(runs, reqs, khoi_luong=KHOI_LUONG_THANG, co_dinh=CO_DINH_THA
     """Cộng chi phí cố định vào chi phí mỗi việc thành công trong phạm vi pilot.
     Ngoại suy: việc thành công/tháng = khối lượng × (thành công trong phạm vi ÷ TOÀN BỘ mẫu)."""
     kq = mo_hinh(runs, reqs[reqs['loai'].isin(pham_vi)])
-    ti_le = kq['thanh_cong'] / len(reqs)
+    ti_le = kq['thanh_cong'] / len(reqs) if len(reqs) else 0.0  # mẫu rỗng → 0 việc/tháng → cố định = inf
     viec_thang = khoi_luong * ti_le
     co_dinh_moi_viec = co_dinh / viec_thang if viec_thang else math.inf
     tong_moi_viec = kq['cps'] + co_dinh_moi_viec
@@ -260,6 +286,7 @@ if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
     kiem_tra_dap_an_biet_truoc()
+    in_bang_a1()
     kiem_tra_bien_a1()
     kiem_tra_du_lieu(runs, reqs)
     ket_qua = mo_hinh(runs, reqs)
