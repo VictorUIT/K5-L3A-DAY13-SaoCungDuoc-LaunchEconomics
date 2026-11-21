@@ -19,7 +19,8 @@
 - Soát CP1: ba phép thử A1 ĐẠT; A2 (4.472 đ/việc thành công, 16,3 lần hoá đơn), A3, A4 khớp số đối chiếu, lệch 0%; hai dòng giả lập có nhãn simulated.
 - Soát CP2: số B1–B4 khớp số đối chiếu (ví dụ làm lại gấp đôi +51,8%, B3 giới hạn 2 lần rẻ nhất 6.901.220 đ [simulated]). Phát hiện và báo nhóm: `TODO CP2` trong `src/lab13.py` chưa viết (số B đang tính bằng `tools/p2_verify.py`), B4 thiếu câu "pilot cần học được gì", định dạng số thập phân phần B chưa thống nhất.
 - CP3: bộ nhãn người 1 cho 20 ca (ND 4 · HT 5 · NC 4 · GH 4 · NG 3). Tỉ lệ đồng thuận với người gắn nhãn 2: 18/20 = 90%; hai ca lệch 13 và 17 đã thống nhất (Giới hạn hệ thống, Ngầm) kèm quy tắc phân biệt. Soạn bảng khắc phục 5 ca (1, 20, 16, 11, 12), đủ năm loại.
-- CP4, CP5: [điền kết quả soát "Xong khi"]
+- Soát CP4 theo "Xong khi": `pilot_plan.yaml` đọc được bằng `yaml.safe_load`, ngoài chú thích không còn dấu `?`; năm câu D1 khớp số đối chiếu (1.251 · 3.103/42 người · 1.000 · 300 · m ≥ 299, DE 6,96); 4 luật dừng đủ bốn vế NẾU – TRONG – THÌ – KHÔNG THÌ; chia theo nhân viên 20 + 20 cụm, ghi rõ đánh đổi mức chênh 6 điểm, power 0,64. Lưu ý: trên Windows phải chạy lệnh kiểm tra với UTF-8 (`PYTHONUTF8=1`), nếu không sẽ báo lỗi mã hoá dù file đúng.
+- Soát CP5 theo "Xong khi": ba chỉ số E1 khớp số đối chiếu (82,83% · 27,12% · 4,25%); có thêm 1 chỉ số dùng, 1 chỉ số an toàn; 11 dòng event đều có `trace_id` (≥ 6); 5 dòng rủi ro kinh tế lấy số từ bảng độ nhạy (≥ 2); hồ sơ launch đủ 7 mục, mỗi mục có con số, trạng thái hợp lệ và một vai trò phụ trách; đề xuất Go có điều kiện; không có từ cấm trong `report/team`.
 
 ## 4. Bằng chứng
 
