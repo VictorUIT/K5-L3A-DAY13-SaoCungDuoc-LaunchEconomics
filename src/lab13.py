@@ -71,7 +71,8 @@ def kiem_tra_bien_a1():
         for k in (1, 2, 3, 10, None):
             assert abs(he_so_chi_phi_moi_viec_thanh_cong(p, k) - 1 / p) < 1e-9
         assert abs(so_lan_chay_ky_vong(p, 1000) - so_lan_chay_ky_vong(p)) < 1e-9  # k lớn → 1/p
-    for p_sai, k_sai in ((-0.1, 2), (1.1, 2), (0.5, 0), (0.5, 2.5), (float('nan'), 2)):
+    for p_sai, k_sai in ((-0.1, 2), (1.1, 2), (0.5, 0), (0.5, -1), (0.5, 2.5), (float('nan'), 2),
+                         (float('inf'), 2), (True, 2), (0.5, True)):
         try:
             so_lan_chay_ky_vong(p_sai, k_sai)
         except ValueError:
@@ -99,6 +100,12 @@ def kiem_tra_du_lieu(runs, reqs):
     assert (reqs.set_index('request_id')['so_lan_chay'] == so_run.reindex(reqs['request_id']).fillna(0)).all(), \
         'so_lan_chay không khớp số dòng trong logix_runs.csv'
     assert reqs['ket_qua'].isin(['thanh_cong', 'lam_lai', 'chuyen_nhan_vien']).all(), 'ket_qua lạ'
+    assert reqs['loai'].isin(LOAI).all(), 'loai lạ'
+    assert runs['status'].isin(['ok', 'loi']).all(), 'status lạ'
+    assert runs['attempt'].ge(1).all() and (runs.groupby('request_id')['attempt'].max() == so_run).all(), \
+        'attempt không chạy liên tục từ 1'
+    assert (runs[['tokens_in', 'tokens_out', 'tool_calls']] >= 0).all().all() and \
+        (reqs[['phut_xem_lai_simulated', 'phut_lam_lai_simulated']] >= 0).all().all(), 'có giá trị âm'
     print(f'Dữ liệu: {vn(len(reqs))} yêu cầu, {vn(len(runs))} lần chạy, khoá và số lần chạy khớp nhau')
 
 
@@ -215,6 +222,14 @@ def in_bang_a3(runs, reqs):
                       f'({ti_le.loc[loai, a] * so_run.loc[loai, a]:.0f}/{so_run.loc[loai, a]:.0f})'
                       for a in ti_le.columns)
         print(f'  {loai:10s} {o}')
+    # Lợi ích biên của chạy lại: run ok ở attempt > 1 là lần ok đầu tiên (agent dừng khi ok)
+    chay_lai = runs.merge(reqs[['request_id', 'loai', 'ket_qua']], on='request_id', validate='many_to_one')
+    chay_lai = chay_lai[chay_lai['attempt'] > 1]
+    print('  Chạy lại (attempt > 1): số lần chạy lại → số lần ok → số việc thành công thêm')
+    for loai in LOAI:
+        r = chay_lai[chay_lai['loai'] == loai]
+        ok = r[r['status'] == 'ok']
+        print(f"  {loai:10s} {len(r)} → {len(ok)} ok → {(ok['ket_qua'] == 'thanh_cong').sum()} thành công")
     return bang
 
 
